@@ -19,7 +19,7 @@ import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mViewModel;
-
+    
     private ViewPager mViewPager;
     private MainPagerAdapter mAdapter;
 
