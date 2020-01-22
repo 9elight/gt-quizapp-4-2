@@ -5,17 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -37,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
+
+
 
     }
     private void initViews(){
@@ -108,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     fragment = MainFragment.newInstance();
                     break;
+                case 1:
+                    fragment = HistoryFragment.newInstance();
+                    break;
                 default:
                     fragment = SettingsFragment.newInstance();
                     break;
@@ -118,7 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
+
+    public static void start(Context context){
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
+    
 }

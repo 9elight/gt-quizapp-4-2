@@ -13,12 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.geektech.quizapp_gt_4_2.R;
 
 public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
+    private Button plus_btn;
+    private Button minus_btn;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -33,6 +37,22 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        plus_btn = view.findViewById(R.id.plus_btn);
+        minus_btn = view.findViewById(R.id.minus_btn);
+
+        plus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.onPlusBtnClick();
+
+            }
+        });
+        minus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.onMinusBtnClick();
+            }
+        });
     }
 
     @Override
@@ -48,8 +68,16 @@ public class MainFragment extends Fragment {
                 Log.d("ololo", s);
             }
         });
+        mViewModel.counter.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.d("ololo", "onChanged: " + integer);
+            }
+        });
 
         mViewModel.onLoginClick();
     }
+
+
 
 }

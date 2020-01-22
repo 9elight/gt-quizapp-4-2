@@ -9,6 +9,7 @@
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile__inactive"
         android:title=""
+
         />
     <item
         android:id="@+id/map"
