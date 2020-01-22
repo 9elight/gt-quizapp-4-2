@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mViewModel = ViewModelProviders.of(this)
+        mViewModel = ViewModelProviders.of(getActivity())
                 .get(MainViewModel.class);
 
         mViewModel.message.observe(this, new Observer<String>() {

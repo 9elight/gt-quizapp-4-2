@@ -33,7 +33,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity()).get(HistoryViewModel.class);
 
     }
 
