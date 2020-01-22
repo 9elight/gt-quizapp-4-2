@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.geektech.quizapp_gt_4_2.R;
@@ -23,6 +24,8 @@ public class MainFragment extends Fragment {
     private MainViewModel mViewModel;
     private Button plus_btn;
     private Button minus_btn;
+    private SeekBar seekBar;
+    private TextView question_amount;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -39,7 +42,8 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         plus_btn = view.findViewById(R.id.plus_btn);
         minus_btn = view.findViewById(R.id.minus_btn);
-
+        seekBar = view.findViewById(R.id.seekBar);
+        question_amount = view.findViewById(R.id.amount);
         plus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +80,27 @@ public class MainFragment extends Fragment {
         });
 
         mViewModel.onLoginClick();
+        setSeekBarAmount();
+    }
+
+    private void setSeekBarAmount(){
+        question_amount.setText(String.valueOf(seekBar.getProgress()));
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                question_amount.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
 
