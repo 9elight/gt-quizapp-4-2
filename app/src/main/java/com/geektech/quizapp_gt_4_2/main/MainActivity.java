@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        setmBottomNavigation();
+
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews(){
         mViewPager = findViewById(R.id.main_view_pager);
         mBottomNavigation = findViewById(R.id.bottom_navigation);
-
+        setmBottomNavigation();
     }
 
     private void setmBottomNavigation(){
@@ -65,12 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 switch (position) {
@@ -86,10 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
         });
     }
 

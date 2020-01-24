@@ -7,4 +7,7 @@
     <string name="minus">-</string>
     <string name="quiz">Quiz</string>
     <string name="questions_amount">Questions amount:</string>
+    <string name="category">Category</string>
+    <string name="difficultly">Difficultly</string>
+    <string name="start">START</string>
 </resources>

@@ -2,10 +2,14 @@
 <resources>
     <dimen name="middle_text_size">16sp</dimen>
     <dimen name="big_text_size">32sp</dimen>
-    <dimen name="title_top_dim">20dp</dimen>
-    <dimen name="title_start_dim">10dp</dimen>
+    <dimen name="title_top_dim">32dp</dimen>
+    <dimen name="title_start_dim">16dp</dimen>
     <dimen name="img_top_dim">89dp</dimen>
     <dimen name="qa_text_top_dim">203dp</dimen>
     <dimen name="qa_text_start_dim">67dp</dimen>
     <dimen name="amount_start_dim">8dp</dimen>
+    <dimen name="tv_category_marginTop">23dp</dimen>
+    <dimen name="difficultly_tv_marginTop">9dp</dimen>
+    <dimen name="spinner_marginTop">5dp</dimen>
+    <dimen name="startBtn_marginTop">64dp</dimen>
 </resources>
