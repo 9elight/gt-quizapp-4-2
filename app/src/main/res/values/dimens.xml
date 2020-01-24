@@ -12,4 +12,6 @@
     <dimen name="difficultly_tv_marginTop">9dp</dimen>
     <dimen name="spinner_marginTop">5dp</dimen>
     <dimen name="startBtn_marginTop">64dp</dimen>
+    <dimen name="tittle_margin_start">19dp</dimen>
+    <dimen name="tittle_margin_top">32dp</dimen>
 </resources>

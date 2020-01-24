@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".quiz.QuizActivity"></activity>
+        <activity android:name=".result.ResultActivity"></activity>
+        <activity android:name=".quiz.QuizActivity" />
         <activity
             android:name=".splash.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -21,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity"></activity>
+        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>

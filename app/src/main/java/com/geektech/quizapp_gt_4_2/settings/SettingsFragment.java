@@ -17,7 +17,6 @@ public class SettingsFragment extends Fragment {
     private SettingsViewModel mViewModel;
     private View view;
     private MainViewModel mainViewModel;
-    private TextView textView;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -34,7 +33,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView = view.findViewById(R.id.settings_textView);
+
     }
 
     @Override

@@ -10,4 +10,6 @@
     <string name="category">Category</string>
     <string name="difficultly">Difficultly</string>
     <string name="start">START</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
 </resources>
