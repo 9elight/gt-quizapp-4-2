@@ -3,6 +3,7 @@ package com.geektech.quizapp_gt_4_2.main;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,12 +19,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.quiz.QuizActivity;
 
 public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
     private SeekBar seekBar;
     private TextView question_amount;
+    private Button start_btn;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -40,6 +43,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         seekBar = view.findViewById(R.id.seekBar);
         question_amount = view.findViewById(R.id.amount);
+        start_btn = view.findViewById(R.id.start_btn);
 
     }
 
@@ -49,10 +53,15 @@ public class MainFragment extends Fragment {
 
         mViewModel = ViewModelProviders.of(getActivity())
                 .get(MainViewModel.class);
-
-
-
         setSeekBarAmount();
+
+        start_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QuizActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private void setSeekBarAmount(){
@@ -74,6 +83,7 @@ public class MainFragment extends Fragment {
             }
         });
     }
+
 
 
 
