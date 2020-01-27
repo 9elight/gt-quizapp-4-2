@@ -32,9 +32,9 @@
         android:layout_height="wrap_content"
         android:text="@string/questions_amount"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
         android:layout_marginTop="@dimen/qa_text_top_dim"
-        android:layout_marginStart="@dimen/qa_text_start_dim"/>
+        />
     <TextView
         android:id="@+id/amount"
         android:layout_width="wrap_content"
@@ -47,11 +47,12 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/questions_amount"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="51dp"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
         android:layout_marginTop="8dp"
         android:progressTint="@color/colorPrimary"
         android:thumb="@drawable/bg_seekbar_thumb"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
         android:progress="25"
         android:max="50"
         tools:targetApi="lollipop" />
@@ -61,14 +62,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/seekBar"
-        app:layout_constraintStart_toStartOf="@id/questions_amount"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
         android:text="@string/category"
         android:layout_marginTop="@dimen/tv_category_marginTop"/>
     <Spinner
         android:id="@+id/category_spinner"
         style="@style/spinner_style"
         app:layout_constraintTop_toBottomOf="@id/category_text_view"
-        app:layout_constraintStart_toStartOf="@id/category_text_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/spinner_marginTop"
         />
     <TextView
