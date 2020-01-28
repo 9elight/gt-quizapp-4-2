@@ -5,5 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="btn_color">#6979F8</color>
     <color name="white">#FFF</color>
-    <color name="def_text_color">#A9A9A9</color>
+    <color name="gray_color_def">#A9A9A9</color>
 </resources>

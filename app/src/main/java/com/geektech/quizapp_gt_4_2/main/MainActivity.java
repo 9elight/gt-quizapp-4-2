@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
