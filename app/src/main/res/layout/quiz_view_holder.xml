@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -27,7 +28,9 @@
         android:text="@string/def_question_text"
         android:textSize="20sp"
         android:textAlignment="center"
+        android:fontFamily="@font/sfpro_bold"
         android:layout_marginTop="@dimen/top_margin_middle"/>
+
     <Button
         android:id="@+id/quiz_btn1"
         style="@style/quiz_button_style"
@@ -59,10 +62,12 @@
 
     <Button
         android:id="@+id/skip_btn"
-        android:layout_width="@dimen/skip_btn_width"
-        android:layout_height="@dimen/skip_btn_height"
-        app:layout_constraintTop_toBottomOf="@id/quiz_btn4"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/skip_btn_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/skip_btn_margin_top"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_btn4"
+        android:background="@drawable/bg_skip_btn"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

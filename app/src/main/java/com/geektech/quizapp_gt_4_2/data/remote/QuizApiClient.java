@@ -18,8 +18,11 @@ public class QuizApiClient implements IQuizApiClient {
     private QuizApi client = retrofit.create(QuizApi.class);
 
     @Override
-    public void getQuestions(int amount, String category, String difficulty, final QuestionsCallback callback) {
-        Call<QuizQuestionsResponse> call = client.getQuestions(amount,category,difficulty);
+    public void getQuestions(int amount, int category, String difficulty, final QuestionsCallback callback) {
+        Call<QuizQuestionsResponse> call = client.getQuestions(
+                10,
+                category,
+                difficulty);
         call.enqueue(new CoreCallback<QuizQuestionsResponse>() {
             @Override
             public void onSuccess(QuizQuestionsResponse result) {
@@ -35,7 +38,7 @@ public class QuizApiClient implements IQuizApiClient {
 
     @Override
     public void getCategories(final CategoriesCallback categoriesCallback) {
-        Call<QuizCategoriesResponse> call = client.getCategories();
+        Call<QuizCategoriesResponse> call = client.getCategories(0,null);
         call.enqueue(new CoreCallback<QuizCategoriesResponse>() {
             @Override
             public void onSuccess(QuizCategoriesResponse result) {
@@ -54,11 +57,15 @@ public class QuizApiClient implements IQuizApiClient {
         @GET("api.php")
         Call<QuizQuestionsResponse> getQuestions(
                 @Query("amount") int amount,
-                @Query("category") String category,
+                @Query("category") int category,
                 @Query("difficulty") String difficulty
         );
         @GET("api_category.php")
-        Call<QuizCategoriesResponse> getCategories();
-
+        Call<QuizCategoriesResponse> getCategories(
+                @Query("id") int id,
+                @Query("name") String name
+        );
+        @GET("api_count_global.php")
+        Call<GlobalResponse> getGlobal();
     }
 }

@@ -40,8 +40,9 @@ public class MainFragment extends Fragment {
     private Spinner categorySpinner;
     private Spinner difficultlySpinner;
     private List<String> categoryArray = new ArrayList<>();
+    private List<Categories> my_categories;
     private int q_amount;
-    private String category;
+    private int category;
     private String diffucult;
 
     public static MainFragment newInstance() {
@@ -84,11 +85,8 @@ public class MainFragment extends Fragment {
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QuizActivity.class);
-                intent.putExtra("q_amount",q_amount);
-                intent.putExtra("category",category);
-                intent.putExtra("difficult",diffucult);
-                getActivity().startActivity(intent);
+
+                QuizActivity.start(getActivity(),q_amount,category,diffucult);
             }
         });
     }
@@ -119,8 +117,11 @@ public class MainFragment extends Fragment {
         App.quizApiClient.getCategories(new IQuizApiClient.CategoriesCallback() {
             @Override
             public void onSuccess(List<Categories> categories) {
-                for (int i = 0; i < categories.size(); i++) {
+                my_categories = categories;
+                for (int i = 1; i < categories.size(); i++) {
+                    categoryArray.add(0,"All");
                     categoryArray.add(categories.get(i).getName());
+
                 }
 
                 ArrayAdapter<String> categoryAdapter =
@@ -147,7 +148,7 @@ public class MainFragment extends Fragment {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = categoryArray.get(position);
+                category = my_categories.get(position).getId();
             }
 
             @Override
@@ -160,13 +161,13 @@ public class MainFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 1:
-                        diffucult = EDifficulty.EASY.toString();
+                        diffucult = "easy";
                         break;
                     case 2:
-                        diffucult = EDifficulty.MEDIUM.toString();
+                        diffucult = "medium";
                         break;
                     case 3:
-                        diffucult = EDifficulty.HARD.toString();
+                        diffucult = "hard";
                         break;
                 }
             }
