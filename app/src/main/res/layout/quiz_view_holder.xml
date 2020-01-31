@@ -33,28 +33,28 @@
 
     <Button
         android:id="@+id/quiz_btn1"
-        style="@style/quiz_button_style"
+        style="@style/QuizButtonStyle"
         app:layout_constraintTop_toBottomOf="@id/question_text_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/top_margin_middle"/>
     <Button
         android:id="@+id/quiz_btn2"
-        style="@style/quiz_button_style"
+        style="@style/QuizButtonStyle"
         app:layout_constraintTop_toBottomOf="@id/quiz_btn1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/margin_top_small"/>
     <Button
         android:id="@+id/quiz_btn3"
-        style="@style/quiz_button_style"
+        style="@style/QuizButtonStyle"
         app:layout_constraintTop_toBottomOf="@id/quiz_btn2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/margin_top_small"/>
     <Button
         android:id="@+id/quiz_btn4"
-        style="@style/quiz_button_style"
+        style="@style/QuizButtonStyle"
         app:layout_constraintTop_toBottomOf="@id/quiz_btn3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

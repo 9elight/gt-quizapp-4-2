@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,8 @@ public class MainFragment extends Fragment {
     private Button start_btn;
     private Spinner categorySpinner;
     private Spinner difficultlySpinner;
-    private List<String> categoryArray = new ArrayList<>();
-    private List<Categories> my_categories;
     private int q_amount;
-    private int category;
+    private Integer category;
     private String diffucult;
 
     public static MainFragment newInstance() {
@@ -59,7 +58,8 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-        setSpinners();
+        setSpinners(getResources().getStringArray(R.array.categories_list),categorySpinner);
+        setSpinners(getResources().getStringArray(R.array.difficult_list),difficultlySpinner);
         spinersListener();
 
 
@@ -87,12 +87,14 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
 
                 QuizActivity.start(getActivity(),q_amount,category,diffucult);
+                Log.e("tag", "onClick: " );
             }
         });
     }
 
     private void setSeekBarAmount() {
         question_amount.setText(String.valueOf(seekBar.getProgress()));
+        q_amount = seekBar.getProgress();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -113,42 +115,24 @@ public class MainFragment extends Fragment {
     }
 
 
-    private void setSpinners() {
-        App.quizApiClient.getCategories(new IQuizApiClient.CategoriesCallback() {
-            @Override
-            public void onSuccess(List<Categories> categories) {
-                my_categories = categories;
-                for (int i = 1; i < categories.size(); i++) {
-                    categoryArray.add(0,"All");
-                    categoryArray.add(categories.get(i).getName());
+    private void setSpinners(String[] list,Spinner spinner) {
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getActivity()
+                        , android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-                }
-
-                ArrayAdapter<String> categoryAdapter =
-                        new ArrayAdapter<String>(getActivity()
-                                , android.R.layout.simple_spinner_item, categoryArray);
-                categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                categorySpinner.setAdapter(categoryAdapter);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        ArrayAdapter<EDifficulty> diffAdapter =
-                new ArrayAdapter<EDifficulty>(getActivity()
-                        , android.R.layout.simple_spinner_item, EDifficulty.values());
-        diffAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        difficultlySpinner.setAdapter(diffAdapter);
     }
 
     private void spinersListener() {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = my_categories.get(position).getId();
+
+                    category = position + 8;
+
+
+
             }
 
             @Override
@@ -156,17 +140,21 @@ public class MainFragment extends Fragment {
 
             }
         });
+
         difficultlySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 1:
-                        diffucult = "easy";
+                        diffucult = null;
                         break;
                     case 2:
-                        diffucult = "medium";
+                        diffucult = "easy" ;
                         break;
                     case 3:
+                        diffucult = "medium";
+                        break;
+                        case 4:
                         diffucult = "hard";
                         break;
                 }

@@ -1,6 +1,10 @@
 package com.geektech.quizapp_gt_4_2.data.remote;
 
+import android.content.Intent;
+
 import com.geektech.quizapp_gt_4_2.core.CoreCallback;
+import com.geektech.quizapp_gt_4_2.model.Categories;
+import com.geektech.quizapp_gt_4_2.model.QuestionsCount;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,15 +22,16 @@ public class QuizApiClient implements IQuizApiClient {
     private QuizApi client = retrofit.create(QuizApi.class);
 
     @Override
-    public void getQuestions(int amount, int category, String difficulty, final QuestionsCallback callback) {
+    public void getQuestions(int amount, Integer category, String difficulty, final QuestionsCallback callback) {
         Call<QuizQuestionsResponse> call = client.getQuestions(
-                10,
+                amount,
                 category,
                 difficulty);
         call.enqueue(new CoreCallback<QuizQuestionsResponse>() {
             @Override
             public void onSuccess(QuizQuestionsResponse result) {
                 callback.onSuccess(result.getResults());
+
             }
 
             @Override
@@ -38,7 +43,7 @@ public class QuizApiClient implements IQuizApiClient {
 
     @Override
     public void getCategories(final CategoriesCallback categoriesCallback) {
-        Call<QuizCategoriesResponse> call = client.getCategories(0,null);
+        Call<QuizCategoriesResponse> call = client.getCategories();
         call.enqueue(new CoreCallback<QuizCategoriesResponse>() {
             @Override
             public void onSuccess(QuizCategoriesResponse result) {
@@ -52,20 +57,60 @@ public class QuizApiClient implements IQuizApiClient {
         });
     }
 
+    @Override
+    public void getGlobal(final GlobalCallback globalCallback) {
+        Call<GlobalResponse> call = client.getGlobal();
+        call.enqueue(new CoreCallback<GlobalResponse>() {
+            @Override
+            public void onSuccess(GlobalResponse result) {
+                globalCallback.onSuccess(result);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                globalCallback.onFailure(e);
+            }
+        });
+    }
+
+    @Override
+    public void getQuestionCount(Integer category, final CountCallback countCallback) {
+        Call<QuizQuestionsCount> call = client.getQuestionsCount(category);
+        call.enqueue(new CoreCallback<QuizQuestionsCount>() {
+            @Override
+            public void onSuccess(QuizQuestionsCount result) {
+                countCallback.onSuccess(result);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
 
     private interface QuizApi{
         @GET("api.php")
         Call<QuizQuestionsResponse> getQuestions(
                 @Query("amount") int amount,
-                @Query("category") int category,
+                @Query("category") Integer category,
                 @Query("difficulty") String difficulty
         );
+
         @GET("api_category.php")
         Call<QuizCategoriesResponse> getCategories(
-                @Query("id") int id,
-                @Query("name") String name
+
         );
+
         @GET("api_count_global.php")
         Call<GlobalResponse> getGlobal();
+
+        @GET("api_count.php")
+        Call<QuizQuestionsCount> getQuestionsCount(
+                @Query("category")Integer category
+        );
     }
+
+
 }

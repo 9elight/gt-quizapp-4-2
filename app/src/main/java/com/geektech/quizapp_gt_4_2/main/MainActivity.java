@@ -38,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
-
+        mViewModel.getCategories();
+        mViewModel.getGlobal();
+        mViewModel.getQuestionCount(9);
+        Log.e("tag", "onCreate: " );
 
     }
     private void initViews(){
@@ -115,6 +118,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 3;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mViewPager.getCurrentItem() != 0){
+            mViewPager.setCurrentItem(0);
+        }else {
+            super.onBackPressed();
         }
     }
 

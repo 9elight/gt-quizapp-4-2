@@ -5,7 +5,7 @@
     <dimen name="title_top_dim">32dp</dimen>
     <dimen name="title_start_dim">16dp</dimen>
     <dimen name="img_top_dim">89dp</dimen>
-    <dimen name="qa_text_top_dim">203dp</dimen>
+    <dimen name="qa_text_top_dim">39dp</dimen>
     <dimen name="qa_text_start_dim">67dp</dimen>
     <dimen name="amount_start_dim">8dp</dimen>
     <dimen name="tv_category_marginTop">25dp</dimen>

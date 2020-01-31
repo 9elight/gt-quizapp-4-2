@@ -15,7 +15,7 @@ import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     private List<Question> list = new ArrayList<>();
-    int pos;
+    String currentCategory;
 
     public QuizAdapter(){
 
@@ -36,8 +36,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
             holder.onBind(list.get(position));
-            pos = position;
+
     }
+
 
     @Override
     public int getItemCount() {
