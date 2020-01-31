@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="@id/category_spinner"
         android:text="@string/category"
         android:layout_marginTop="@dimen/tv_category_marginTop"/>
-    <Spinner
+    <org.angmarch.views.NiceSpinner
         android:id="@+id/category_spinner"
         style="@style/SpinnerStyle"
         app:layout_constraintTop_toBottomOf="@id/category_text_view"
@@ -84,7 +84,7 @@
         app:layout_constraintStart_toStartOf="@id/category_spinner"
         android:text="@string/difficultly"
         android:layout_marginTop="@dimen/difficultly_tv_marginTop"/>
-    <Spinner
+    <org.angmarch.views.NiceSpinner
         android:id="@+id/difficultly_spinner"
         style="@style/SpinnerStyle"
         app:layout_constraintTop_toBottomOf="@id/difficultly_text_view"

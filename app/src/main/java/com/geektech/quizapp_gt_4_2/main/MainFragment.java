@@ -2,7 +2,6 @@ package com.geektech.quizapp_gt_4_2.main;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,23 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
-import com.geektech.quizapp_gt_4_2.model.Categories;
-import com.geektech.quizapp_gt_4_2.model.EDifficulty;
-import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.quiz.QuizActivity;
+import com.geektech.quizapp_gt_4_2.utils.SimpleSeekBarChangeListener;
 
-import java.util.ArrayList;
+import org.angmarch.views.NiceSpinner;
+
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainFragment extends Fragment {
@@ -38,8 +32,8 @@ public class MainFragment extends Fragment {
     private SeekBar seekBar;
     private TextView question_amount;
     private Button start_btn;
-    private Spinner categorySpinner;
-    private Spinner difficultlySpinner;
+    private NiceSpinner categorySpinner;
+    private NiceSpinner difficultlySpinner;
     private int q_amount;
     private Integer category;
     private String diffucult;
@@ -60,7 +54,7 @@ public class MainFragment extends Fragment {
         initViews(view);
         setSpinners(getResources().getStringArray(R.array.categories_list),categorySpinner);
         setSpinners(getResources().getStringArray(R.array.difficult_list),difficultlySpinner);
-        spinersListener();
+
 
 
     }
@@ -69,8 +63,8 @@ public class MainFragment extends Fragment {
         seekBar = view.findViewById(R.id.seekBar);
         question_amount = view.findViewById(R.id.amount);
         start_btn = view.findViewById(R.id.start_btn);
-        categorySpinner = view.findViewById(R.id.category_spinner);
-        difficultlySpinner = view.findViewById(R.id.difficultly_spinner);
+        categorySpinner =(NiceSpinner) view.findViewById(R.id.category_spinner);
+        difficultlySpinner =(NiceSpinner) view.findViewById(R.id.difficultly_spinner);
     }
 
 
@@ -82,69 +76,16 @@ public class MainFragment extends Fragment {
                 .get(MainViewModel.class);
         setSeekBarAmount();
 
-        start_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        start_btn.setOnClickListener(v -> {
+            category = categorySpinner.getSelectedIndex() + 8;
+            difficultlySpinner.getSelectedIndex();
 
-                QuizActivity.start(getActivity(),q_amount,category,diffucult);
-                Log.e("tag", "onClick: " );
-            }
+            QuizActivity.start(getActivity(),q_amount,category, getDiffuculty());
+            Log.e("tag", "onClick: " );
         });
     }
-
-    private void setSeekBarAmount() {
-        question_amount.setText(String.valueOf(seekBar.getProgress()));
-        q_amount = seekBar.getProgress();
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                question_amount.setText(String.valueOf(progress));
-                q_amount = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-
-
-    private void setSpinners(String[] list,Spinner spinner) {
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(getActivity()
-                        , android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-    }
-
-    private void spinersListener() {
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    category = position + 8;
-
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        difficultlySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
+    private String getDiffuculty(){
+        switch (difficultlySpinner.getSelectedIndex()) {
                     case 1:
                         diffucult = null;
                         break;
@@ -158,13 +99,26 @@ public class MainFragment extends Fragment {
                         diffucult = "hard";
                         break;
                 }
-            }
+                return diffucult;
+    }
 
+    private void setSeekBarAmount() {
+        question_amount.setText(String.valueOf(seekBar.getProgress()));
+        q_amount = seekBar.getProgress();
+        seekBar.setOnSeekBarChangeListener(new SimpleSeekBarChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                super.onProgressChanged(seekBar, progress, fromUser);
+                question_amount.setText(String.valueOf(progress));
+                q_amount = progress;
             }
         });
+    }
+
+
+    private void setSpinners(String[] array,NiceSpinner spinner) {
+        List<String> list = new LinkedList<>(Arrays.asList(array));
+        spinner.attachDataSource(list);
     }
 
 }

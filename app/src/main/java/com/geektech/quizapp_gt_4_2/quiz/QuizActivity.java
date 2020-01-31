@@ -59,23 +59,12 @@ public class QuizActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new QuizAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return true;
-            }
-        });
+        recyclerView.setOnTouchListener((v, event) -> true);
 
     }
 
     private void getQuestions(){
-        qViewModel.question.observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> list) {
-                adapter.updateQuestions(list);
-            }
-        });
+        qViewModel.question.observe(this, list -> adapter.updateQuestions(list));
     }
 
     public static void start(Context context,int amount,int category,String difficult){
