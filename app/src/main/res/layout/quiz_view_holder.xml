@@ -6,29 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/quiz_progressBar"
-        android:layout_width="175dp"
-        android:layout_height="6dp"
-        android:indeterminate="false"
-        android:max="10"
-        android:progress="5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:progressDrawable="@drawable/bg_progress_bar"
-        android:layout_marginTop="29dp"/>
+
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="@dimen/question_width"
         android:layout_height="@dimen/question_height"
-        app:layout_constraintTop_toBottomOf="@id/quiz_progressBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/def_question_text"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:fontFamily="@font/sfpro_bold"
+        android:fontFamily="@font/sfprodisplaylight"
         android:layout_marginTop="@dimen/top_margin_middle"/>
 
     <Button
@@ -60,14 +49,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/margin_top_small"/>
 
-    <Button
-        android:id="@+id/skip_btn"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="@dimen/skip_btn_margin_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/quiz_btn4"
-        android:background="@drawable/bg_skip_btn"
-        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
-package com.geektech.quizapp_gt_4_2.quiz;
+package com.geektech.quizapp_gt_4_2.quiz.recycler;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -10,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView question_text;
@@ -36,6 +41,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(Question question) {
             question_text.setText(question.getQuestion());
+//            setAnswers(question);
 
+    }
+
+    private void setAnswers(Question question){
+        List<String> allAnswers = new ArrayList<>(question.getIncorrectAnswers());
+        Log.e("tag", "setAnswers: ");
     }
 }

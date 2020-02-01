@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.quiz;
+package com.geektech.quizapp_gt_4_2.quiz.recycler;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
+import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

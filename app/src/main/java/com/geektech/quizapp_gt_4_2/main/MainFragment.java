@@ -80,11 +80,11 @@ public class MainFragment extends Fragment {
             category = categorySpinner.getSelectedIndex() + 8;
             difficultlySpinner.getSelectedIndex();
 
-            QuizActivity.start(getActivity(),q_amount,category, getDiffuculty());
+            QuizActivity.start(getActivity(),q_amount,category, getDifficulty());
             Log.e("tag", "onClick: " );
         });
     }
-    private String getDiffuculty(){
+    private String getDifficulty(){
         switch (difficultlySpinner.getSelectedIndex()) {
                     case 1:
                         diffucult = null;

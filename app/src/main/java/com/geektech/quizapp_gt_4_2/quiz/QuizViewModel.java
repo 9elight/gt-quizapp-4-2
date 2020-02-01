@@ -11,12 +11,20 @@ import java.util.List;
 
 public class QuizViewModel extends ViewModel {
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
+    public MutableLiveData<Integer> rv_position = new MutableLiveData<>();
+    private Integer count;
 
-    public void getQuestions(int amount,Integer category,String difficulty){
+    public QuizViewModel() {
+        rv_position.setValue(1);
+        count = 1;
+    }
+
+    public void getQuestions(int amount, Integer category, String difficulty){
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
                 question.postValue(result);
+
             }
 
             @Override
@@ -24,5 +32,12 @@ public class QuizViewModel extends ViewModel {
 
             }
         });
+    }
+
+    public  void nextPage(){
+        rv_position.setValue(++count);
+    }
+    public void prevPage(){
+        rv_position.setValue(--count);
     }
 }
