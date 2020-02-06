@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="@id/categoryTitle"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="10dp"
-        android:onClick="back_click"
+        android:onClick="backClick"
         android:src="@drawable/ic_path"
         android:layout_marginStart="24dp"/>
     <ProgressBar
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@id/quiz_recyclerView"
         android:background="@drawable/bg_skip_btn"
         android:text="Skip"
-        android:onClick="skip_click"
+        android:onClick="skipClick"
         android:textColor="@color/white"
         />
 

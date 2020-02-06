@@ -21,13 +21,17 @@ import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizAdapter;
+import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.result.ResultActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Listener {
+    private static String EXTRA_AMOUNT = "q_amount";
+    private static String EXTRA_CATEGORY = "category";
+    private static String DIFFICULTY = "difficult";
     private RecyclerView recyclerView;
     private QuizAdapter adapter;
     private TextView categoryTitle;
@@ -38,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
     private int q_amount;
     private Integer category;
     private String difficulty;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new QuizAdapter();
+        adapter = new QuizAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -75,9 +80,9 @@ public class QuizActivity extends AppCompatActivity {
 
     }
     private void getQuestions() {
-        q_amount = getIntent().getIntExtra("q_amount", 25);
-        category = getIntent().getIntExtra("category", 0);
-        difficulty = getIntent().getStringExtra("difficult");
+        q_amount = getIntent().getIntExtra(EXTRA_AMOUNT, 25);
+        category = getIntent().getIntExtra(EXTRA_CATEGORY, 0);
+        difficulty = getIntent().getStringExtra(EXTRA_CATEGORY);
         if (category == 8) {
             category = null;
         }
@@ -109,11 +114,11 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public static void start(Context context, int amount, int category, String difficult) {
-        context.startActivity(new Intent(context, QuizActivity.class).putExtra("q_amount", amount)
-                .putExtra("category", category).putExtra("difficult", difficult));
+        context.startActivity(new Intent(context, QuizActivity.class).putExtra(EXTRA_AMOUNT, amount)
+                .putExtra(EXTRA_CATEGORY, category).putExtra(DIFFICULTY, difficult));
     }
 
-    public void skip_click(View view) {
+    public void skipClick(View view) {
         if (progressBar.getProgress() < q_amount){
             qViewModel.nextPage();
         }else {
@@ -123,12 +128,17 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
-    public void back_click(View view) {
+    public void backClick(View view) {
         if (progressBar.getProgress() != 1){
             qViewModel.prevPage();
         }else{
             MainActivity.start(this);
             finish();
         }
+    }
+
+    @Override
+    public void onAnswerClick(int position, int selectedAnswerPosition) {
+        qViewModel.onAnswerClick(position,selectedAnswerPosition);
     }
 }

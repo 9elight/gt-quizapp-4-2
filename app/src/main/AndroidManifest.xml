@@ -20,8 +20,7 @@
             android:name=".quiz.QuizActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".splash.SplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".splash.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

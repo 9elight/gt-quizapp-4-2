@@ -1,10 +1,10 @@
 package com.geektech.quizapp_gt_4_2.data.remote;
 
 import com.geektech.quizapp_gt_4_2.core.ICoreCallback;
+import com.geektech.quizapp_gt_4_2.data.remote.model.GlobalResponse;
+import com.geektech.quizapp_gt_4_2.data.remote.model.QuizQuestionsCount;
 import com.geektech.quizapp_gt_4_2.model.Categories;
-import com.geektech.quizapp_gt_4_2.model.Global;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.model.QuestionsCount;
 
 import java.util.List;
 

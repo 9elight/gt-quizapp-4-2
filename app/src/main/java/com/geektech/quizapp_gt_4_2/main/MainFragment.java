@@ -79,7 +79,6 @@ public class MainFragment extends Fragment {
         start_btn.setOnClickListener(v -> {
             category = categorySpinner.getSelectedIndex() + 8;
             difficultlySpinner.getSelectedIndex();
-
             QuizActivity.start(getActivity(),q_amount,category, getDifficulty());
             Log.e("tag", "onClick: " );
         });

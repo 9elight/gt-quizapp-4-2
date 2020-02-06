@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.data.remote;
+package com.geektech.quizapp_gt_4_2.data.remote.model;
 
 import com.geektech.quizapp_gt_4_2.model.Categories;
 import com.google.gson.annotations.SerializedName;

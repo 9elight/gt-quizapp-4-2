@@ -19,14 +19,18 @@ import java.util.List;
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView question_text;
     private ProgressBar progressBar;
+    private Listener listener;
+
     private Button q_btn1;
     private Button q_btn2;
     private Button q_btn3;
     private Button q_btn4;
     private Button skip;
-    public QuizViewHolder(@NonNull View itemView) {
+    public QuizViewHolder(@NonNull View itemView,
+    Listener listener) {
         super(itemView);
         initViews();
+        this.listener = listener;
     }
 
     private void initViews(){
@@ -48,5 +52,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private void setAnswers(Question question){
         List<String> allAnswers = new ArrayList<>(question.getIncorrectAnswers());
         Log.e("tag", "setAnswers: ");
+    }
+    public interface Listener{
+        void onAnswerClick(int position,int selectedAnswerPosition);
     }
 }

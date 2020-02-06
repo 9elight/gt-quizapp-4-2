@@ -24,7 +24,7 @@
     <style name="DefaultTextStyle">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/gray_color_def</item>
-        <item name="android:fontFamily">@font/sfpro_bold_italic</item>
+        <item name="android:fontFamily">@font/sfprodisplaylight</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

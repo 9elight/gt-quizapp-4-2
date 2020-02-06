@@ -1,14 +1,12 @@
 package com.geektech.quizapp_gt_4_2.data.remote;
 
-import android.content.Intent;
-
 import com.geektech.quizapp_gt_4_2.core.CoreCallback;
-import com.geektech.quizapp_gt_4_2.model.Categories;
-import com.geektech.quizapp_gt_4_2.model.QuestionsCount;
+import com.geektech.quizapp_gt_4_2.data.remote.model.GlobalResponse;
+import com.geektech.quizapp_gt_4_2.data.remote.model.QuizCategoriesResponse;
+import com.geektech.quizapp_gt_4_2.data.remote.model.QuizQuestionsCount;
+import com.geektech.quizapp_gt_4_2.data.remote.model.QuizQuestionsResponse;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;

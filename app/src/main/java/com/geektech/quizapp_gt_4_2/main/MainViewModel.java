@@ -1,15 +1,13 @@
 package com.geektech.quizapp_gt_4_2.main;
 
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.geektech.quizapp_gt_4_2.App;
-import com.geektech.quizapp_gt_4_2.data.remote.GlobalResponse;
+import com.geektech.quizapp_gt_4_2.data.remote.model.GlobalResponse;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
-import com.geektech.quizapp_gt_4_2.data.remote.QuizQuestionsCount;
+import com.geektech.quizapp_gt_4_2.data.remote.model.QuizQuestionsCount;
 import com.geektech.quizapp_gt_4_2.model.Categories;
 
 import java.util.List;

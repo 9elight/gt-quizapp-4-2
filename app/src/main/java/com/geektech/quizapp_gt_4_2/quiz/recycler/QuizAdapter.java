@@ -9,28 +9,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     private List<Question> list = new ArrayList<>();
+    private QuizViewHolder.Listener listener;
     String currentCategory;
 
-    public QuizAdapter(){
-
+    public QuizAdapter(QuizViewHolder.Listener listener){
+        this.listener = listener;
     }
     public void updateQuestions(List<Question> list){
-        this.list = list;
+        this.list.clear();
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
     @NonNull
     @Override
     public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.quiz_view_holder,parent,false);
-        QuizViewHolder viewHolder = new QuizViewHolder(view);
+        View view = inflater.inflate(R.layout.item_quiz,parent,false);
+        QuizViewHolder viewHolder = new QuizViewHolder(view,listener);
         return viewHolder;
     }
 
