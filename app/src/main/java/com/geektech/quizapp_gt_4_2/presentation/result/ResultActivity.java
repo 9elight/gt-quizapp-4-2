@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.result;
+package com.geektech.quizapp_gt_4_2.presentation.result;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainActivity;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 
 public class ResultActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.history;
+package com.geektech.quizapp_gt_4_2.presentation.history;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainViewModel;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainViewModel;
 
 import java.util.ArrayList;
 

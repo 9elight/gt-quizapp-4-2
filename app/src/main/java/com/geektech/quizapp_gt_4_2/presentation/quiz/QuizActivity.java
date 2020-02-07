@@ -1,4 +1,14 @@
-package com.geektech.quizapp_gt_4_2.quiz;
+package com.geektech.quizapp_gt_4_2.presentation.quiz;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -6,29 +16,19 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizAdapter;
-import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
-import com.geektech.quizapp_gt_4_2.result.ResultActivity;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
+import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
+import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
+import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Listener {
+    //region Static
     private static String EXTRA_AMOUNT = "q_amount";
     private static String EXTRA_CATEGORY = "category";
     private static String DIFFICULTY = "difficult";
@@ -42,8 +42,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private int q_amount;
     private Integer category;
     private String difficulty;
-
-
+    public static void start(Context context, int amount, int category, String difficult) {
+        context.startActivity(new Intent(context, QuizActivity.class).putExtra(EXTRA_AMOUNT, amount)
+                .putExtra(EXTRA_CATEGORY, category).putExtra(DIFFICULTY, difficult));
+    }
+    //endregion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +102,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         });
     }
     private void getPosition(){
-        qViewModel.rv_position.observe(this, new Observer<Integer>() {
+        qViewModel.currentQuestionPosition.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 recyclerView.scrollToPosition(integer - 1);
@@ -113,10 +116,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         });
     }
 
-    public static void start(Context context, int amount, int category, String difficult) {
-        context.startActivity(new Intent(context, QuizActivity.class).putExtra(EXTRA_AMOUNT, amount)
-                .putExtra(EXTRA_CATEGORY, category).putExtra(DIFFICULTY, difficult));
-    }
+
 
     public void skipClick(View view) {
         if (progressBar.getProgress() < q_amount){

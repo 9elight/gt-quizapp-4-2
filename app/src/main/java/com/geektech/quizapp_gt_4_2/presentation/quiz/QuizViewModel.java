@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.quiz;
+package com.geektech.quizapp_gt_4_2.presentation.quiz;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,16 +11,17 @@ import java.util.List;
 
 public class QuizViewModel extends ViewModel {
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
-    public MutableLiveData<Integer> rv_position = new MutableLiveData<>();
+    public MutableLiveData<Integer> currentQuestionPosition = new MutableLiveData<>();
     private List<Question> mQuestion;
     private Integer count;
         public QuizViewModel() {
-        rv_position.setValue(1);
+        currentQuestionPosition.setValue(1);
         count = 1;
     }
 
 
     public void getQuestions(int amount, Integer category, String difficulty){
+
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
@@ -40,10 +41,10 @@ public class QuizViewModel extends ViewModel {
 
     public  void nextPage(){
 
-        rv_position.setValue(++count);
+        currentQuestionPosition.setValue(++count);
     }
     public void prevPage(){
-        rv_position.setValue(--count);
+        currentQuestionPosition.setValue(--count);
     }
 
     public void onAnswerClick(int position, int selectedAnswerPosition) {

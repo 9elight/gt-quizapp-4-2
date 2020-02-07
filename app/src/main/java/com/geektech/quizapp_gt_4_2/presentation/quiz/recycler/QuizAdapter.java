@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.quiz.recycler;
+package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
 import android.view.LayoutInflater;
 import android.view.View;

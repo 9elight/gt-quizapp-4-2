@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.splash;
+package com.geektech.quizapp_gt_4_2.presentation.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainActivity;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 
 public class SplashScreen extends AppCompatActivity {
 

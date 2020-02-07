@@ -8,14 +8,14 @@ public class Question {
     @SerializedName("category")
     private String category;
     @SerializedName("type")
-    private String type;
+    private EType type;
     @SerializedName("difficulty")
     private EDifficulty difficulty;
     @SerializedName("question")
     private String question;
-    @SerializedName("correctAnswer")
+    @SerializedName("correct_answer")
     private String correctAnswer;
-    @SerializedName("incorrectAnswers")
+    @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
 
     private List<String> answers;
@@ -37,7 +37,7 @@ public class Question {
         this.selectedAnswerPosition = selectedAnswerPosition;
     }
 
-    public Question(String category, String type, EDifficulty difficulty, String question,
+    public Question(String category, EType type, EDifficulty difficulty, String question,
                     String correct_answer, List<String> incorrect_answers) {
         this.category = category;
         this.type = type;
@@ -55,11 +55,11 @@ public class Question {
         this.category = category;
     }
 
-    public String getType() {
+    public EType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EType type) {
         this.type = type;
     }
 

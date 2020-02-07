@@ -1,5 +1,4 @@
-package com.geektech.quizapp_gt_4_2.settings;
-import androidx.lifecycle.Observer;
+package com.geektech.quizapp_gt_4_2.presentation.settings;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -8,9 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainViewModel;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainViewModel;
 
 public class SettingsFragment extends Fragment {
 

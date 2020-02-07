@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.history;
+package com.geektech.quizapp_gt_4_2.presentation.history;
 
 import android.view.LayoutInflater;
 import android.view.View;
