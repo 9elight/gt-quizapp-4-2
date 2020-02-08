@@ -117,10 +117,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mViewPager.getCurrentItem() != 0){
-            mViewPager.setCurrentItem(0);
-        }else {
-            super.onBackPressed();
+        switch (mViewPager.getCurrentItem()){
+            case 2:
+                mViewPager.setCurrentItem(1);
+                break;
+            case 1:
+                mViewPager.setCurrentItem(0);
+                break;
+            case 0:
+                super.onBackPressed();
         }
     }
 

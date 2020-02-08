@@ -1,5 +1,7 @@
 package com.geektech.quizapp_gt_4_2.data.remote;
 
+import android.util.Log;
+
 import com.geektech.quizapp_gt_4_2.core.CoreCallback;
 import com.geektech.quizapp_gt_4_2.data.remote.model.GlobalResponse;
 import com.geektech.quizapp_gt_4_2.data.remote.model.QuizCategoriesResponse;
@@ -27,10 +29,12 @@ public class QuizApiClient implements IQuizApiClient {
                 amount,
                 category,
                 difficulty);
+        Log.e("TAG", "getQuestions: "+call.request().url() );
         call.enqueue(new CoreCallback<QuizQuestionsResponse>() {
             @Override
             public void onSuccess(QuizQuestionsResponse result) {
                 callback.onSuccess(result.getResults());
+
             }
 
             @Override
@@ -39,7 +43,6 @@ public class QuizApiClient implements IQuizApiClient {
             }
         });
     }
-
     @Override
     public void getCategories(final CategoriesCallback categoriesCallback) {
         Call<QuizCategoriesResponse> call = client.getCategories();

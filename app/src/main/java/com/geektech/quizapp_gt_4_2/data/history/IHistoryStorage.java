@@ -28,4 +28,5 @@ public interface IHistoryStorage {
     @Query("SELECT * FROM QuizResult")
     LiveData<List<QuizResult>> getAll();
 
+    int saveQuizResult(QuizResult result);
 }

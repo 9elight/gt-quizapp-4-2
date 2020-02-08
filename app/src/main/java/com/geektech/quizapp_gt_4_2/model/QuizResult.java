@@ -2,8 +2,7 @@ package com.geektech.quizapp_gt_4_2.model;
 
 import androidx.room.Entity;
 
-import com.geektech.quizapp_gt_4_2.model.Question;
-
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,13 +12,23 @@ public class QuizResult {
     private String difficulty;
     private List<Question> questions;
     private int correctAnswerAmount;
+    private Date createdAt;
 
-    public QuizResult(int id, String category, String difficulty, List<Question> questions, int correctAnswerAmount) {
+    public QuizResult(int id, String category, String difficulty, List<Question> questions, int correctAnswerAmount, Date createdAt) {
         this.id = id;
         this.category = category;
         this.difficulty = difficulty;
         this.questions = questions;
         this.correctAnswerAmount = correctAnswerAmount;
+        this.createdAt = createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public int getId() {

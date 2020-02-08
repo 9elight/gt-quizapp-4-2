@@ -17,10 +17,11 @@ public class Question {
     private String correctAnswer;
     @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
+    private boolean isAnswered;
 
     private List<String> answers;
-    private Integer selectedAnswerPosition;
 
+    private Integer selectedAnswerPosition;
     public List<String> getAnswers() {
         return answers;
     }
@@ -37,14 +38,26 @@ public class Question {
         this.selectedAnswerPosition = selectedAnswerPosition;
     }
 
-    public Question(String category, EType type, EDifficulty difficulty, String question,
-                    String correct_answer, List<String> incorrect_answers) {
+    public Question(String category, EType type, EDifficulty difficulty, String question
+            , String correctAnswer, List<String> incorrectAnswers, boolean isAnswered,
+                    List<String> answers, Integer selectedAnswerPosition) {
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;
         this.question = question;
-        this.correctAnswer = correct_answer;
-        this.incorrectAnswers = incorrect_answers;
+        this.correctAnswer = correctAnswer;
+        this.incorrectAnswers = incorrectAnswers;
+        this.isAnswered = isAnswered;
+        this.answers = answers;
+        this.selectedAnswerPosition = selectedAnswerPosition;
+    }
+
+    public boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswered(boolean answerd) {
+        isAnswered = answerd;
     }
 
     public String getCategory() {

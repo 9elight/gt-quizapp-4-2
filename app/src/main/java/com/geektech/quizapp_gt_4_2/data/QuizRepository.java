@@ -46,6 +46,11 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
     }
 
     @Override
+    public int saveQuizResult(QuizResult result) {
+        return 0;
+    }
+
+    @Override
     public void getQuestions(int amount, Integer category, String difficulty,final QuestionsCallback callback) {
         quizApiClient.getQuestions(amount, category, difficulty, new QuestionsCallback() {
             @Override

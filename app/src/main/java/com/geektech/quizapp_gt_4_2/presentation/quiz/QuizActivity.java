@@ -31,7 +31,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     //region Static
     private static String EXTRA_AMOUNT = "q_amount";
     private static String EXTRA_CATEGORY = "category";
-    private static String DIFFICULTY = "difficult";
+    private static String EXTRA_DIFFICULTY = "difficult";
     private RecyclerView recyclerView;
     private QuizAdapter adapter;
     private TextView categoryTitle;
@@ -44,7 +44,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private String difficulty;
     public static void start(Context context, int amount, int category, String difficult) {
         context.startActivity(new Intent(context, QuizActivity.class).putExtra(EXTRA_AMOUNT, amount)
-                .putExtra(EXTRA_CATEGORY, category).putExtra(DIFFICULTY, difficult));
+                .putExtra(EXTRA_CATEGORY, category).putExtra(EXTRA_DIFFICULTY, difficult));
     }
     //endregion
     @Override
@@ -56,6 +56,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         rv_builder();
         getQuestions();
 
+       qViewModel.finishEvent.observe(this, aVoid -> finish());
+       qViewModel.openResultEvent.observe(this,
+               integer -> ResultActivity.start(this,integer)
+       );
 
     }
 
@@ -85,32 +89,29 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private void getQuestions() {
         q_amount = getIntent().getIntExtra(EXTRA_AMOUNT, 25);
         category = getIntent().getIntExtra(EXTRA_CATEGORY, 0);
-        difficulty = getIntent().getStringExtra(EXTRA_CATEGORY);
+        difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
         if (category == 8) {
             category = null;
         }
         qViewModel.getQuestions(q_amount, category, difficulty);
-        qViewModel.question.observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> list) {
-                questions = list;
-                Log.e("порядок","1" );
-                adapter.updateQuestions(list);
-                Log.e("tag", "onChanged: " );
-                getPosition();
-            }
+        qViewModel.question.observe(this, list -> {
+            questions = list;
+            Log.e("порядок","1" );
+            adapter.updateQuestions(list);
+            Log.e("tag", "onChanged: " );
+            getPosition();
         });
     }
     private void getPosition(){
         qViewModel.currentQuestionPosition.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                recyclerView.scrollToPosition(integer - 1);
-                tv_question_amount.setText(integer + "/" + q_amount );
-                progressBar.setProgress(integer);
+                recyclerView.scrollToPosition(integer);
+                tv_question_amount.setText(integer + 1  + "/" + q_amount );
+                progressBar.setProgress(integer + 1);
                 progressBar.setMax(q_amount);
-                if (questions.size() > 0)categoryTitle.setText(questions.get(integer -1).getCategory());
-                Log.e("порядок","2" );
+                if (questions.size() > 0)categoryTitle.setText(questions.get(integer).getCategory());
+                Log.e("порядок","2 " + integer );
 
             }
         });
@@ -120,9 +121,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     public void skipClick(View view) {
         if (progressBar.getProgress() < q_amount){
-            qViewModel.nextPage();
+            qViewModel.onSkipClick();
         }else {
-            ResultActivity.start(this);
+           qViewModel.finishEvent.call();
         }
 
 
@@ -130,7 +131,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     public void backClick(View view) {
         if (progressBar.getProgress() != 1){
-            qViewModel.prevPage();
+            qViewModel.onBackPressed();
         }else{
             MainActivity.start(this);
             finish();

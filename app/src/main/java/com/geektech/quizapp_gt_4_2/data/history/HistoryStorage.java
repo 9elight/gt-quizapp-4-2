@@ -1,5 +1,7 @@
 package com.geektech.quizapp_gt_4_2.data.history;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
@@ -30,5 +32,11 @@ public class HistoryStorage implements IHistoryStorage {
     @Override
     public LiveData<List<QuizResult>> getAll() {
         return null;
+    }
+
+    @Override
+    public int saveQuizResult(QuizResult result) {
+        Log.e("ololo", "saveQuizResult: " );
+        return 0;
     }
 }

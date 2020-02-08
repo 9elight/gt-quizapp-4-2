@@ -1,13 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.main;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.QuizActivity;
@@ -52,9 +50,8 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-        setSpinners(getResources().getStringArray(R.array.categories_list),categorySpinner);
-        setSpinners(getResources().getStringArray(R.array.difficult_list),difficultlySpinner);
-
+        setSpinners(getResources().getStringArray(R.array.categories_list), categorySpinner);
+        setSpinners(getResources().getStringArray(R.array.difficult_list), difficultlySpinner);
 
 
     }
@@ -63,8 +60,8 @@ public class MainFragment extends Fragment {
         seekBar = view.findViewById(R.id.seekBar);
         question_amount = view.findViewById(R.id.amount);
         start_btn = view.findViewById(R.id.start_btn);
-        categorySpinner =(NiceSpinner) view.findViewById(R.id.category_spinner);
-        difficultlySpinner =(NiceSpinner) view.findViewById(R.id.difficultly_spinner);
+        categorySpinner = (NiceSpinner) view.findViewById(R.id.category_spinner);
+        difficultlySpinner = (NiceSpinner) view.findViewById(R.id.difficultly_spinner);
     }
 
 
@@ -79,26 +76,27 @@ public class MainFragment extends Fragment {
         start_btn.setOnClickListener(v -> {
             category = categorySpinner.getSelectedIndex() + 8;
             difficultlySpinner.getSelectedIndex();
-            QuizActivity.start(getActivity(),q_amount,category, getDifficulty());
-            Log.e("tag", "onClick: " );
+            QuizActivity.start(getActivity(), q_amount, category, getDifficulty());
+            Log.e("tag", "onClick: ");
         });
     }
-    private String getDifficulty(){
+
+    private String getDifficulty() {
         switch (difficultlySpinner.getSelectedIndex()) {
-                    case 1:
-                        diffucult = null;
-                        break;
-                    case 2:
-                        diffucult = "easy" ;
-                        break;
-                    case 3:
-                        diffucult = "medium";
-                        break;
-                        case 4:
-                        diffucult = "hard";
-                        break;
-                }
-                return diffucult;
+            case 0:
+                diffucult = null;
+                break;
+            case 1:
+                diffucult = "easy";
+                break;
+            case 2:
+                diffucult = "medium";
+                break;
+            case 3:
+                diffucult = "hard";
+                break;
+        }
+        return diffucult;
     }
 
     private void setSeekBarAmount() {
@@ -115,7 +113,7 @@ public class MainFragment extends Fragment {
     }
 
 
-    private void setSpinners(String[] array,NiceSpinner spinner) {
+    private void setSpinners(String[] array, NiceSpinner spinner) {
         List<String> list = new LinkedList<>(Arrays.asList(array));
         spinner.attachDataSource(list);
     }
