@@ -21,4 +21,7 @@
     <dimen name="skip_btn_width">90dp</dimen>
     <dimen name="skip_btn_height">40dp</dimen>
     <dimen name="skip_btn_margin_top">124dp</dimen>
+    <dimen name="txt_settings_size">18</dimen>
+    <dimen name="settings_img_marginEnd">25</dimen>
+    <dimen name="settingsTextStartPadding">30dp</dimen>
 </resources>

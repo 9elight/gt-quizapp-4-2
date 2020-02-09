@@ -110,7 +110,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
                 tv_question_amount.setText(integer + 1  + "/" + q_amount );
                 progressBar.setProgress(integer + 1);
                 progressBar.setMax(q_amount);
-                if (questions.size() > 0)categoryTitle.setText(questions.get(integer).getCategory());
+                categoryTitle.setText(questions.get(integer).getCategory());
                 Log.e("порядок","2 " + integer );
 
             }

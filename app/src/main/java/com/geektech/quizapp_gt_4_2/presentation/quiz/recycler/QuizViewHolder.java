@@ -1,6 +1,7 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         initViews();
         this.listener = listener;
         initListeners();
+
     }
 
     private void initViews() {
@@ -58,6 +60,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 listener.onAnswerClick(position, 0);
+
+
             }
         });
         q_btn2.setOnClickListener(v -> listener.onAnswerClick(position, 1));
@@ -65,9 +69,27 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         q_btn4.setOnClickListener(v -> listener.onAnswerClick(position, 3));
         boolean_btn1.setOnClickListener(v -> listener.onAnswerClick(position, 0));
         boolean_btn2.setOnClickListener(v -> listener.onAnswerClick(position, 1));
+
     }
 
+    private void setButtons(boolean enabled) {
+        boolean_btn1.setEnabled(enabled);
+        boolean_btn2.setEnabled(enabled);
+        q_btn1.setEnabled(enabled);
+        q_btn2.setEnabled(enabled);
+        q_btn3.setEnabled(enabled);
+        q_btn4.setEnabled(enabled);
+    }
+
+
     public void onBind(Question question, int position) {
+        if (question.getSelectedAnswerPosition() == null) {
+            setButtons(true);
+        } else {
+            setButtons(false);
+        }
+
+
         this.position = position;
         this.question = question;
         question_text.setText(Html.fromHtml(question.getQuestion()));
@@ -78,14 +100,32 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             q_btn2.setText(Html.fromHtml(question.getAnswers().get(1)));
             q_btn3.setText(Html.fromHtml(question.getAnswers().get(2)));
             q_btn4.setText(Html.fromHtml(question.getAnswers().get(3)));
+            Log.e("tag", "initListeners: ");
         } else {
             boolean_btn1.setText(question.getAnswers().get(0));
             boolean_btn2.setText(question.getAnswers().get(1));
         }
+        if (question.getSelectedAnswerPosition() != null) btn_tate(question);
+
 
     }
 
-
+    private void btn_tate(Question question) {
+        switch (question.getSelectedAnswerPosition()) {
+            case 0:
+                q_btn1.setBackgroundResource(R.drawable.btn_active_state);
+                break;
+            case 1:
+                q_btn2.setBackgroundResource(R.drawable.btn_active_state);
+                break;
+            case 2:
+                q_btn3.setBackgroundResource(R.drawable.btn_active_state);
+                break;
+            case 3:
+                q_btn4.setBackgroundResource(R.drawable.btn_active_state);
+                break;
+        }
+    }
 
 
     public interface Listener {

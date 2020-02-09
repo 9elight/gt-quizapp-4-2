@@ -100,10 +100,9 @@ public class QuizViewModel extends ViewModel {
 
     public void onAnswerClick(int position, int selectedAnswerPosition) {
         if (mQuestion.size() > position && position >= 0) {
-            if (mQuestion.get(position).getSelectedAnswerPosition() == null){
             mQuestion.get(position).setSelectedAnswerPosition(selectedAnswerPosition);
             Log.e("ololo", "setAnswer: " + position + selectedAnswerPosition);
-            }
+
             question.setValue(mQuestion);
             if (position + 1 == mQuestion.size()) {
                 finishQuiz();

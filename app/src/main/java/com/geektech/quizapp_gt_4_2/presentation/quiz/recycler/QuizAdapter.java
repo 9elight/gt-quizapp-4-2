@@ -46,4 +46,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     public int getItemCount() {
         return list.size();
     }
+
+
 }
