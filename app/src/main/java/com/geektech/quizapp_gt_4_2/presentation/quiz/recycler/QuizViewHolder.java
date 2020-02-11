@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
+import android.graphics.Color;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -38,12 +39,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
         initListeners();
 
+
     }
 
     private void initViews() {
         multiply_container = itemView.findViewById(R.id.multiply_container);
         boolean_container = itemView.findViewById(R.id.boolean_container);
-
         question_text = itemView.findViewById(R.id.question_text_view);
         boolean_btn1 = itemView.findViewById(R.id.boolean_btn1);
         boolean_btn2 = itemView.findViewById(R.id.boolean_btn2);
@@ -59,20 +60,18 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         q_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onAnswerClick(position, 0);
-
-
+                listener.onAnswerClick(getAdapterPosition(), 0);
             }
         });
-        q_btn2.setOnClickListener(v -> listener.onAnswerClick(position, 1));
-        q_btn3.setOnClickListener(v -> listener.onAnswerClick(position, 2));
-        q_btn4.setOnClickListener(v -> listener.onAnswerClick(position, 3));
-        boolean_btn1.setOnClickListener(v -> listener.onAnswerClick(position, 0));
-        boolean_btn2.setOnClickListener(v -> listener.onAnswerClick(position, 1));
+        q_btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+        q_btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
+        q_btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
+        boolean_btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+        boolean_btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
 
     }
 
-    private void setButtons(boolean enabled) {
+    private void setButtonsEnabled(boolean enabled) {
         boolean_btn1.setEnabled(enabled);
         boolean_btn2.setEnabled(enabled);
         q_btn1.setEnabled(enabled);
@@ -83,13 +82,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
 
 
     public void onBind(Question question, int position) {
-        if (question.getSelectedAnswerPosition() == null) {
-            setButtons(true);
+        clearHolder();
+        if (question.isAnswered()) {
+            setButtonsEnabled(false);
         } else {
-            setButtons(false);
+            setButtonsEnabled(true);
         }
-
-
         this.position = position;
         this.question = question;
         question_text.setText(Html.fromHtml(question.getQuestion()));
@@ -102,28 +100,94 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             q_btn4.setText(Html.fromHtml(question.getAnswers().get(3)));
             Log.e("tag", "initListeners: ");
         } else {
+            multiply_container.setVisibility(View.INVISIBLE);
+            boolean_container.setVisibility(View.VISIBLE);
             boolean_btn1.setText(question.getAnswers().get(0));
             boolean_btn2.setText(question.getAnswers().get(1));
         }
-        if (question.getSelectedAnswerPosition() != null) btn_tate(question);
-
+        if (question.isAnswered())
+            btn_state(question);
 
     }
 
-    private void btn_tate(Question question) {
-        switch (question.getSelectedAnswerPosition()) {
-            case 0:
-                q_btn1.setBackgroundResource(R.drawable.btn_active_state);
-                break;
-            case 1:
-                q_btn2.setBackgroundResource(R.drawable.btn_active_state);
-                break;
-            case 2:
-                q_btn3.setBackgroundResource(R.drawable.btn_active_state);
-                break;
-            case 3:
-                q_btn4.setBackgroundResource(R.drawable.btn_active_state);
-                break;
+    public void clearHolder() {
+        q_btn1.setBackgroundResource(R.drawable.btn_states);
+        q_btn2.setBackgroundResource(R.drawable.btn_states);
+        q_btn3.setBackgroundResource(R.drawable.btn_states);
+        q_btn4.setBackgroundResource(R.drawable.btn_states);
+        q_btn1.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        q_btn2.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        q_btn3.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        q_btn4.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        boolean_btn1.setBackgroundResource(R.drawable.btn_states);
+        boolean_btn2.setBackgroundResource(R.drawable.btn_states);
+        boolean_btn1.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        boolean_btn2.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+
+    }
+
+    private void btn_state(Question question) {
+        if (question.getSelectedAnswerPosition() != null) {
+            switch (question.getSelectedAnswerPosition()) {
+                case 0:
+                    if (question.getCorrectAnswer().equals(question.getAnswers().get(0))) {
+                        q_btn1.setBackgroundResource(R.drawable.btn_correct_state);
+                        boolean_btn1.setBackgroundResource(R.drawable.btn_correct_state);
+                        q_btn1.setTextColor(Color.WHITE);
+                        boolean_btn1.setTextColor(Color.WHITE);
+                        Log.e("tag", "btn1_state: correct");
+                    } else {
+                        Log.e("tag", "btn2_state: incorrect");
+                        q_btn1.setBackgroundResource(R.drawable.btn_wrong_state);
+                        boolean_btn1.setBackgroundResource(R.drawable.btn_wrong_state);
+                        q_btn1.setTextColor(Color.WHITE);
+                        boolean_btn1.setTextColor(Color.WHITE);
+
+                    }
+                    break;
+                case 1:
+                    if (question.getCorrectAnswer().equals(question.getAnswers().get(1))) {
+                        q_btn2.setBackgroundResource(R.drawable.btn_correct_state);
+                        boolean_btn2.setBackgroundResource(R.drawable.btn_correct_state);
+                        q_btn2.setTextColor(Color.WHITE);
+                        boolean_btn2.setTextColor(Color.WHITE);
+
+                        Log.e("tag", "btn2_state: correct");
+                    } else {
+                        q_btn2.setBackgroundResource(R.drawable.btn_wrong_state);
+                        boolean_btn2.setBackgroundResource(R.drawable.btn_wrong_state);
+                        q_btn2.setTextColor(Color.WHITE);
+                        boolean_btn2.setTextColor(Color.WHITE);
+                        Log.e("tag", "btn3_state: incorrect");
+                    }
+
+                    break;
+                case 2:
+                    if (question.getCorrectAnswer().equals(question.getAnswers().get(2))) {
+                        q_btn3.setBackgroundResource(R.drawable.btn_correct_state);
+                        Log.e("tag", "btn3_state: correct");
+                        q_btn3.setTextColor(Color.WHITE);
+
+                    } else {
+                        q_btn3.setBackgroundResource(R.drawable.btn_wrong_state);
+                        Log.e("tag", "btn3_state: incorrect");
+                        q_btn3.setTextColor(Color.WHITE);
+
+                    }
+                    break;
+                case 3:
+                    if (question.getCorrectAnswer().equals(question.getAnswers().get(3))) {
+                        q_btn4.setBackgroundResource(R.drawable.btn_correct_state);
+                        q_btn4.setTextColor(Color.WHITE);
+
+                        Log.e("tag", "btn4_state: correct");
+                    } else {
+                        q_btn4.setBackgroundResource(R.drawable.btn_wrong_state);
+                        q_btn4.setTextColor(Color.WHITE);
+                        Log.e("tag", "btn4_state: incorrect");
+                    }
+                    break;
+            }
         }
     }
 

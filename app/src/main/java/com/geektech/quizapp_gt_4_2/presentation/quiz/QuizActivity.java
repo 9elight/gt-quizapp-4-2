@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
@@ -51,7 +49,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        qViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        qViewModel = ViewModelProviders.of(this) .get(QuizViewModel.class);
         initViews();
         rv_builder();
         getQuestions();
@@ -77,15 +75,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         recyclerView.setLayoutManager(layoutManager);
         adapter = new QuizAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return true;
-            }
-        });
+        recyclerView.setOnTouchListener((v, event) -> true);
 
     }
+
     private void getQuestions() {
         q_amount = getIntent().getIntExtra(EXTRA_AMOUNT, 25);
         category = getIntent().getIntExtra(EXTRA_CATEGORY, 0);
@@ -102,6 +95,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
             getPosition();
         });
     }
+
     private void getPosition(){
         qViewModel.currentQuestionPosition.observe(this, new Observer<Integer>() {
             @Override
@@ -112,12 +106,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
                 progressBar.setMax(q_amount);
                 categoryTitle.setText(questions.get(integer).getCategory());
                 Log.e("порядок","2 " + integer );
-
             }
         });
     }
-
-
 
     public void skipClick(View view) {
         if (progressBar.getProgress() < q_amount){
@@ -133,7 +124,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         if (progressBar.getProgress() != 1){
             qViewModel.onBackPressed();
         }else{
-            MainActivity.start(this);
             finish();
         }
     }
@@ -141,5 +131,14 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     @Override
     public void onAnswerClick(int position, int selectedAnswerPosition) {
         qViewModel.onAnswerClick(position,selectedAnswerPosition);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (progressBar.getProgress() != 1){
+            qViewModel.onBackPressed();
+        }else{
+            finish();
+        }
     }
 }

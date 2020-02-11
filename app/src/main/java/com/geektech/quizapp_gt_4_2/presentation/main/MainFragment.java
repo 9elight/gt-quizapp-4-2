@@ -2,19 +2,17 @@ package com.geektech.quizapp_gt_4_2.presentation.main;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.QuizActivity;
 import com.geektech.quizapp_gt_4_2.utils.SimpleSeekBarChangeListener;
 
@@ -24,7 +22,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends CoreFragment  {
 
     private MainViewModel mViewModel;
     private SeekBar seekBar;
@@ -41,10 +39,11 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+    protected int getLayoutId() {
+        return R.layout.main_fragment;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

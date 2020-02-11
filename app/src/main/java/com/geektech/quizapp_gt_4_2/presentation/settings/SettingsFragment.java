@@ -1,17 +1,16 @@
 package com.geektech.quizapp_gt_4_2.presentation.settings;
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.presentation.main.MainViewModel;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends CoreFragment {
 
     private SettingsViewModel mViewModel;
     private View view;
@@ -21,13 +20,7 @@ public class SettingsFragment extends Fragment {
         return new SettingsFragment();
     }
 
-    @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.settings_fragment, container, false);
-        return view;
 
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -45,4 +38,8 @@ public class SettingsFragment extends Fragment {
         }
 
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.settings_fragment;
+    }
 }

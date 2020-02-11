@@ -20,6 +20,7 @@ public class QuizViewModel extends ViewModel {
     private List<Question> mQuestion;
     private Integer count;
     private int id = 0;
+    private String resultCategory,resultDifficulty;
     SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
     SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
 
@@ -36,20 +37,30 @@ public class QuizViewModel extends ViewModel {
                 mQuestion = result;
                 question.postValue(mQuestion);
                 id++;
+                if (category != null){
+                    resultCategory = mQuestion.get(0).getCategory();
+                }else{
+                    resultCategory = "Mixed";
+                }
+                if (difficulty != null){
+                   resultDifficulty = mQuestion.get(0).getDifficulty().toString();
+                }else{
+                    resultDifficulty = "All";
+                }
             }
-
             @Override
             public void onFailure(Exception e) {
                 Log.e("ololo", "onFailure: " + e.getLocalizedMessage());
             }
         });
+
     }
 
     void finishQuiz() {
         QuizResult result = new QuizResult(
                 id,
-                getCategory(),
-                getDifficulty(),
+                resultCategory,
+                resultDifficulty,
                 mQuestion,
                 getCorrectAnswersAmount(),
                 new Date()
@@ -57,11 +68,13 @@ public class QuizViewModel extends ViewModel {
         int resultId = App.historyStorage.saveQuizResult(result);
         finishEvent.call();
         openResultEvent.setValue(resultId);
+        Log.e("tag", "finishQuiz: " );
     }
 
     void onSkipClick() {
+        mQuestion.get(currentQuestionPosition.getValue()).setAnswered(true);
+        question.setValue(mQuestion);
         currentQuestionPosition.setValue(++count);
-        mQuestion.get(currentQuestionPosition.getValue()).setSelectedAnswerPosition(5);
     }
 
     void onBackPressed() {
@@ -75,7 +88,7 @@ public class QuizViewModel extends ViewModel {
         for (int i = 0; i <= mQuestion.size() - 1; i++) {
             String correctAnswer = mQuestion.get(i).getCorrectAnswer();
             String selectedAnswer = mQuestion.get(i).getAnswers()
-                    .get(mQuestion.get(i).getSelectedAnswerPosition());
+                     .get(mQuestion.get(i).getSelectedAnswerPosition());
             if (correctAnswer.equals(selectedAnswer)) {
                 correctAnswersAmount++;
             }
@@ -83,26 +96,12 @@ public class QuizViewModel extends ViewModel {
         return correctAnswersAmount;
     }
 
-    private String getCategory(){
-        String category = "Mixed";
-            if (mQuestion.get(0).getCategory().equals(mQuestion.get(1).getCategory())){
-                category = mQuestion.get(0).getCategory();
-            }
-        return category;
-    }
-    private String getDifficulty(){
-        String category = "All";
-            if (mQuestion.get(0).getDifficulty().equals(mQuestion.get(1).getDifficulty())){
-                category = mQuestion.get(0).getDifficulty().toString();
-            }
-        return category;
-    }
 
     public void onAnswerClick(int position, int selectedAnswerPosition) {
         if (mQuestion.size() > position && position >= 0) {
             mQuestion.get(position).setSelectedAnswerPosition(selectedAnswerPosition);
+            mQuestion.get(position).setAnswered(true);
             Log.e("ololo", "setAnswer: " + position + selectedAnswerPosition);
-
             question.setValue(mQuestion);
             if (position + 1 == mQuestion.size()) {
                 finishQuiz();
@@ -110,8 +109,6 @@ public class QuizViewModel extends ViewModel {
                 currentQuestionPosition.setValue(++count);
             }
         }
-        Log.e("ololo", "onAnswerClick: " + position + " " + mQuestion.get(position).getSelectedAnswerPosition());
-
     }
 }
 

@@ -9,6 +9,11 @@ import com.geektech.quizapp_gt_4_2.model.QuizResult;
 import java.util.List;
 
 public class HistoryStorage implements IHistoryStorage {
+    private HistoryDao dao;
+    public HistoryStorage(HistoryDao historyDao) {
+        dao = historyDao;
+    }
+
     @Override
     public void save(QuizResult result) {
 
@@ -16,7 +21,7 @@ public class HistoryStorage implements IHistoryStorage {
 
     @Override
     public void delete(QuizResult result) {
-
+        dao.delete(result);
     }
 
     @Override
@@ -26,7 +31,7 @@ public class HistoryStorage implements IHistoryStorage {
 
     @Override
     public QuizResult get(int id) {
-        return null;
+        return dao.get(id);
     }
 
     @Override
@@ -37,6 +42,6 @@ public class HistoryStorage implements IHistoryStorage {
     @Override
     public int saveQuizResult(QuizResult result) {
         Log.e("ololo", "saveQuizResult: " );
-        return 0;
+        return (int) dao.insert(result);
     }
 }

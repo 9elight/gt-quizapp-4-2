@@ -18,6 +18,7 @@
     <string name="leave_feedback">Leave Feedback</string>
     <string name="clear_history">Clear History</string>
     <string name="version">1.0</string>
+    <string name="result">Result</string>
     <string-array name="categories_list">
         <item>All</item>
         <item>General Knowledge</item>

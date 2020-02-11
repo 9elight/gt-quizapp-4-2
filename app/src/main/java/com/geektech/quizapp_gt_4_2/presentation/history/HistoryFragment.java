@@ -1,29 +1,23 @@
 package com.geektech.quizapp_gt_4_2.presentation.history;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.presentation.main.MainViewModel;
+import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 
 import java.util.ArrayList;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends CoreFragment {
 
     private HistoryViewModel mViewModel;
     private RecyclerView recyclerView;
-    private View view;
     private HistoryAdapter adapter;
 
 
@@ -32,15 +26,20 @@ public class HistoryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.history_fragment, container, false);
-        rv_builder();
-        adapter.updateHistory(new ArrayList<>());
-        return view;
+    protected int getLayoutId() {
+        return R.layout.history_fragment;
     }
 
-    private void rv_builder(){
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        rv_builder(view);
+        adapter.updateHistory(new ArrayList<>());
+    }
+
+    private void rv_builder(View view){
         recyclerView = view.findViewById(R.id.history_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(
                 getActivity(),

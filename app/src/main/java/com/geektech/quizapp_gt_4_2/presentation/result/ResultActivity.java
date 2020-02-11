@@ -10,14 +10,14 @@ import com.geektech.quizapp_gt_4_2.R;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private static String EXTRA_ID = "result_id";
+    private static String EXTRA_QUIZ_ID = "result_id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
     }
 
-    public static void start(Context context,Integer integer){
-        context.startActivity(new Intent(context, ResultActivity.class).putExtra(EXTRA_ID,integer));
+    public static void start(Context context,Integer quiz_id){
+        context.startActivity(new Intent(context, ResultActivity.class).putExtra(EXTRA_QUIZ_ID,quiz_id));
     }
 }

@@ -8,7 +8,7 @@
     <color name="black">#000</color>
     <color name="gray_text">#801F2041</color>
     <color name="gray_color_def">#A9A9A9</color>
-    <color name="correct_color">#09CF11</color>
+    <color name="correct_color">#4CE2A7</color>
     <color name="wrong_color">#FF4D4D</color>
     <color name="colorDark_purple">#3F3356</color>
 </resources>
