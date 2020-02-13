@@ -71,25 +71,35 @@ public class QuizViewModel extends ViewModel {
     }
 
     void onSkipClick() {
-        mQuestion.get(currentQuestionPosition.getValue()).setAnswered(true);
-        question.setValue(mQuestion);
-        currentQuestionPosition.setValue(++count);
+        if (mQuestion.size() >= currentQuestionPosition.getValue()) {
+            question.setValue(mQuestion);
+            currentQuestionPosition.setValue(++count);
+            if (currentQuestionPosition.getValue() + 1 == mQuestion.size()) {
+                finishQuiz();
+            }
+        }
     }
 
     void onBackPressed() {
+        if (currentQuestionPosition.getValue() != 0){
         currentQuestionPosition.setValue(--count);
         Log.e("tag", "onBackPressed: " + currentQuestionPosition.getValue()
                 + mQuestion.get(currentQuestionPosition.getValue()).getSelectedAnswerPosition());
+        }else{
+            finishEvent.call();
+        }
     }
 
     public int getCorrectAnswersAmount() {
         int correctAnswersAmount = 0;
-        for (int i = 0; i <= mQuestion.size() - 1; i++) {
-            String correctAnswer = mQuestion.get(i).getCorrectAnswer();
-            String selectedAnswer = mQuestion.get(i).getAnswers()
-                     .get(mQuestion.get(i).getSelectedAnswerPosition());
-            if (correctAnswer.equals(selectedAnswer)) {
-                correctAnswersAmount++;
+        for (int i = 0; i <= mQuestion.size() - 1 ; i++) {
+            if (mQuestion.get(i).getSelectedAnswerPosition() != null){
+                String correctAnswer = mQuestion.get(i).getCorrectAnswer();
+                String selectedAnswer = mQuestion.get(i).getAnswers()
+                        .get(mQuestion.get(i).getSelectedAnswerPosition());
+                if (correctAnswer.equals(selectedAnswer)) {
+                    correctAnswersAmount++;
+                }
             }
         }
         return correctAnswersAmount;

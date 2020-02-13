@@ -57,10 +57,18 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void initListeners() {
-        q_btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
-        q_btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
-        q_btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
-        q_btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
+        q_btn1.setOnClickListener(v -> {
+            listener.onAnswerClick(getAdapterPosition(),0);
+        });
+        q_btn2.setOnClickListener(v -> {
+            listener.onAnswerClick(getAdapterPosition(), 1);
+        });
+        q_btn3.setOnClickListener(v -> {
+            listener.onAnswerClick(getAdapterPosition(), 2);
+        });
+        q_btn4.setOnClickListener(v -> {
+            listener.onAnswerClick(getAdapterPosition(), 3);
+        });
         boolean_btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
         boolean_btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
 

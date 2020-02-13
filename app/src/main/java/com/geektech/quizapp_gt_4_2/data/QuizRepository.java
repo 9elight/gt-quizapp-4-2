@@ -78,12 +78,10 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
 
     @Override
     public void getGlobal(GlobalCallback globalCallback) {
-
     }
 
     @Override
     public void getQuestionCount(Integer category, CountCallback countCallback) {
-
     }
 
 

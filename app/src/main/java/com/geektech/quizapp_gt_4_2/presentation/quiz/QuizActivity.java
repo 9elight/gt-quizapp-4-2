@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,8 +35,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private static String EXTRA_DIFFICULTY = "difficult";
     private RecyclerView recyclerView;
     private QuizAdapter adapter;
-    private TextView categoryTitle;
-    private TextView tv_question_amount;
+    private TextView categoryTitle,tv_question_amount;
+    private ImageView back_ic;
     private Button skipButton;
     private QuizViewModel qViewModel;
     private ProgressBar progressBar;
@@ -78,6 +79,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         categoryTitle = findViewById(R.id.categoryTitle);
         loading_animation = findViewById(R.id.loading_animation);
         skipButton = findViewById(R.id.skip_btn);
+        back_ic = findViewById(R.id.back_ic);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -124,27 +126,18 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
                 progressBar.setMax(q_amount);
                 categoryTitle.setVisibility(View.VISIBLE);
                 categoryTitle.setText(questions.get(integer).getCategory());
+                back_ic.setVisibility(View.VISIBLE);
                 Log.e("порядок","2 " + integer );
             }
         });
     }
 
     public void skipClick(View view) {
-        if (progressBar.getProgress() < q_amount){
-            qViewModel.onSkipClick();
-        }else {
-           qViewModel.finishEvent.call();
-        }
-
-
+        qViewModel.onSkipClick();
     }
 
     public void backClick(View view) {
-        if (progressBar.getProgress() != 1){
-            qViewModel.onBackPressed();
-        }else{
-            finish();
-        }
+        qViewModel.onBackPressed();
     }
 
     @Override
@@ -154,10 +147,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     @Override
     public void onBackPressed() {
-        if (progressBar.getProgress() != 1){
-            qViewModel.onBackPressed();
-        }else{
-            finish();
-        }
+        qViewModel.onBackPressed();
     }
+
 }
