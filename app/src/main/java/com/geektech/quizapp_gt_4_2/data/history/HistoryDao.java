@@ -16,7 +16,7 @@ public interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(QuizResult quizResult);
 
-    @Query("SELECT * FROM quiz_result WHERE id=:id")
+    @Query("SELECT * FROM quiz_result WHERE id= :id")
     QuizResult get(int id);
 
     @Delete

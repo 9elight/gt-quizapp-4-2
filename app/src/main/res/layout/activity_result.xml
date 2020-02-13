@@ -65,7 +65,7 @@
                android:layout_marginTop="@dimen/result_category_tittle_margin"
                />
            <TextView
-               android:id="@+id/result_category_value"
+               android:id="@+id/result_difficulty_value"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="All"

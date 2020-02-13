@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
@@ -34,8 +36,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private QuizAdapter adapter;
     private TextView categoryTitle;
     private TextView tv_question_amount;
+    private Button skipButton;
     private QuizViewModel qViewModel;
     private ProgressBar progressBar;
+    private LottieAnimationView loading_animation;
     private List<Question> questions = new ArrayList<>();
     private int q_amount;
     private Integer category;
@@ -54,10 +58,16 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         rv_builder();
         getQuestions();
 
-       qViewModel.finishEvent.observe(this, aVoid -> finish());
-       qViewModel.openResultEvent.observe(this,
-               integer -> ResultActivity.start(this,integer)
-       );
+       qViewModel.finishEvent.observe(this, aVoid -> {
+           finish();
+       });
+       qViewModel.openResultEvent.observe(this, new Observer<Integer>() {
+           @Override
+           public void onChanged(Integer integer) {
+               ResultActivity.start(QuizActivity.this,integer);
+           }
+       });
+
 
     }
 
@@ -66,6 +76,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         tv_question_amount = findViewById(R.id.currentProgress);
         progressBar = findViewById(R.id.quiz_progressBar);
         categoryTitle = findViewById(R.id.categoryTitle);
+        loading_animation = findViewById(R.id.loading_animation);
+        skipButton = findViewById(R.id.skip_btn);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -90,9 +102,13 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         qViewModel.question.observe(this, list -> {
             questions = list;
             Log.e("порядок","1" );
+            recyclerView.setVisibility(View.VISIBLE);
             adapter.updateQuestions(list);
             Log.e("tag", "onChanged: " );
             getPosition();
+            loading_animation.setVisibility(View.INVISIBLE);
+            skipButton.setVisibility(View.VISIBLE);
+
         });
     }
 
@@ -102,8 +118,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
             public void onChanged(Integer integer) {
                 recyclerView.scrollToPosition(integer);
                 tv_question_amount.setText(integer + 1  + "/" + q_amount );
+                progressBar.setVisibility(View.VISIBLE);
+                tv_question_amount.setVisibility(View.VISIBLE);
                 progressBar.setProgress(integer + 1);
                 progressBar.setMax(q_amount);
+                categoryTitle.setVisibility(View.VISIBLE);
                 categoryTitle.setText(questions.get(integer).getCategory());
                 Log.e("порядок","2 " + integer );
             }

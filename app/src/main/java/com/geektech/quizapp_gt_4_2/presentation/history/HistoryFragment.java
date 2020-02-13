@@ -5,14 +5,17 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
+import com.geektech.quizapp_gt_4_2.model.History;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryFragment extends CoreFragment {
 
@@ -54,7 +57,13 @@ public class HistoryFragment extends CoreFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(HistoryViewModel.class);
-
+        mViewModel.historyLiveData.observe(getActivity(), new Observer<List<History>>() {
+            @Override
+            public void onChanged(List<History> histories) {
+                if (histories != null)
+                adapter.updateHistory(histories);
+            }
+        });
     }
 
 }

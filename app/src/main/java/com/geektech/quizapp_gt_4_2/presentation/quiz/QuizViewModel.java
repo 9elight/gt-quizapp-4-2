@@ -19,7 +19,7 @@ public class QuizViewModel extends ViewModel {
     public MutableLiveData<Integer> currentQuestionPosition = new MutableLiveData<>();
     private List<Question> mQuestion;
     private Integer count;
-    private int id = 0;
+    private int id;
     private String resultCategory,resultDifficulty;
     SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
     SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
@@ -36,7 +36,6 @@ public class QuizViewModel extends ViewModel {
             public void onSuccess(List<Question> result) {
                 mQuestion = result;
                 question.postValue(mQuestion);
-                id++;
                 if (category != null){
                     resultCategory = mQuestion.get(0).getCategory();
                 }else{
@@ -111,4 +110,5 @@ public class QuizViewModel extends ViewModel {
         }
     }
 }
+
 

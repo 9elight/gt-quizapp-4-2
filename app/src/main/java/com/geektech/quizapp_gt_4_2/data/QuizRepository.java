@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.geektech.quizapp_gt_4_2.data.history.IHistoryStorage;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
+import com.geektech.quizapp_gt_4_2.model.History;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
@@ -20,10 +21,6 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
         this.historyStorage = historyStorage;
     }
 
-    @Override
-    public void save(QuizResult result) {
-
-    }
 
     @Override
     public void delete(QuizResult result) {
@@ -46,8 +43,13 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
     }
 
     @Override
+    public LiveData<List<History>> getAllHistory() {
+        return historyStorage.getAllHistory();
+    }
+
+    @Override
     public int saveQuizResult(QuizResult result) {
-        return 0;
+        return historyStorage.saveQuizResult(result);
     }
 
     @Override

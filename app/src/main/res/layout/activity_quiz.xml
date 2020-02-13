@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.quiz.QuizActivity">
-
+    tools:context=".presentation.quiz.QuizActivity"
+    android:background="@color/white">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/loading_lotie_animation"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:background="@color/white"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <TextView
         android:id="@+id/categoryTitle"
         android:layout_width="wrap_content"
@@ -14,6 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/sfpro_bold"
+        android:visibility="invisible"
         android:text="category"
         android:textSize="@dimen/middle_text_size"
         android:layout_marginTop="@dimen/tv_category_marginTop"/>
@@ -25,6 +39,7 @@
         app:layout_constraintBottom_toBottomOf="@id/categoryTitle"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="10dp"
+        android:visibility="invisible"
         android:onClick="backClick"
         android:src="@drawable/ic_path"
         android:layout_marginStart="24dp"/>
@@ -33,6 +48,7 @@
         android:layout_width="175dp"
         android:layout_height="6dp"
         android:indeterminate="false"
+        android:visibility="invisible"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:max="10"
         android:progress="5"
@@ -48,13 +64,15 @@
         app:layout_constraintTop_toBottomOf="@id/quiz_progressBar"
         app:layout_constraintStart_toStartOf="@id/quiz_progressBar"
         app:layout_constraintEnd_toEndOf="@id/quiz_progressBar"
+        android:visibility="invisible"
         android:text="5/10"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quiz_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/quiz_progressBar"/>
+        app:layout_constraintTop_toBottomOf="@id/quiz_progressBar"
+        android:visibility="invisible"/>
     <Button
         android:id="@+id/skip_btn"
         android:layout_width="85dp"
@@ -64,6 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quiz_recyclerView"
         android:background="@drawable/bg_skip_btn"
+        android:visibility="invisible"
         android:text="Skip"
         android:onClick="skipClick"
         android:textColor="@color/white"

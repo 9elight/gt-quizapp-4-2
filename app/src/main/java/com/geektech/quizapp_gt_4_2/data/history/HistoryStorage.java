@@ -1,11 +1,12 @@
 package com.geektech.quizapp_gt_4_2.data.history;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 
+import com.geektech.quizapp_gt_4_2.model.History;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryStorage implements IHistoryStorage {
@@ -14,10 +15,6 @@ public class HistoryStorage implements IHistoryStorage {
         dao = historyDao;
     }
 
-    @Override
-    public void save(QuizResult result) {
-
-    }
 
     @Override
     public void delete(QuizResult result) {
@@ -36,12 +33,29 @@ public class HistoryStorage implements IHistoryStorage {
 
     @Override
     public LiveData<List<QuizResult>> getAll() {
-        return null;
+        return dao.getAll();
+    }
+
+    @Override
+    public LiveData<List<History>> getAllHistory() {
+        return Transformations.map(getAll(),quizResult -> {
+            ArrayList<History> histories = new ArrayList<>();
+            if (quizResult.size() > 0) {
+                for (int i = 0; i < quizResult.size(); i++) {
+                    histories.add(i,new History(quizResult.get(i).getId(),
+                            quizResult.get(i).getCategory(),
+                            quizResult.get(i).getDifficulty(),
+                            quizResult.get(i).getCorrectAnswerAmount(),
+                            quizResult.get(i).getQuestions().size(),
+                            quizResult.get(i).getCreatedAt()));
+                }
+            }
+            return histories;
+        });
     }
 
     @Override
     public int saveQuizResult(QuizResult result) {
-        Log.e("ololo", "saveQuizResult: " );
         return (int) dao.insert(result);
     }
 }
