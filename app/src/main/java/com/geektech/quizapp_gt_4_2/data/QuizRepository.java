@@ -21,25 +21,19 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
         this.historyStorage = historyStorage;
     }
 
-
-    @Override
-    public void delete(QuizResult result) {
-
-    }
-
     @Override
     public void deleteAll() {
-
+        historyStorage.deleteAll();
     }
 
     @Override
     public QuizResult get(int id) {
-        return null;
+        return historyStorage.get(id);
     }
 
     @Override
     public LiveData<List<QuizResult>> getAll() {
-        return null;
+        return historyStorage.getAll();
     }
 
     @Override
@@ -50,6 +44,11 @@ public class QuizRepository implements IQuizApiClient,IHistoryStorage {
     @Override
     public int saveQuizResult(QuizResult result) {
         return historyStorage.saveQuizResult(result);
+    }
+
+    @Override
+    public void delete(int id) {
+        historyStorage.get(id);
     }
 
     @Override

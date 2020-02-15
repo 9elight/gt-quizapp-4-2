@@ -12,7 +12,7 @@ public interface IHistoryStorage {
 
     int saveQuizResult(QuizResult result);
 
-    void delete(QuizResult result);
+    void delete(int id);
 
 
     void deleteAll();

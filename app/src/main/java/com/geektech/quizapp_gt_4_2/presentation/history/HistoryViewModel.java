@@ -14,7 +14,7 @@ public class HistoryViewModel extends ViewModel {
     private List<QuizResult> mHistory;
 
     LiveData<List<History>> historyLiveData = App.historyStorage.getAllHistory();
-
+    LiveData<List<QuizResult>> quizResultLiveData = App.historyStorage.getAll();
 
 
 

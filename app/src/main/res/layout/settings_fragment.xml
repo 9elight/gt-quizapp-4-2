@@ -34,7 +34,7 @@
 
 
         <TextView
-            android:id="@+id/settings_txt_first"
+            android:id="@+id/settings_share"
             style="@style/DefaultTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,7 +42,7 @@
             android:background="?selectableItemBackground"
             android:gravity="center|start"
             android:text="@string/share_this_app"
-            android:textColor="@color/gray_color_def"
+            android:textColor="@color/black"
             android:textSize="@dimen/txt_settings_size" />
 
 
@@ -53,7 +53,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/settings_img_marginEnd"
-            android:src="@drawable/ic_path"
+            android:src="@drawable/ic_vector"
              />
 
     </RelativeLayout>
@@ -74,7 +74,7 @@
 
 
         <TextView
-            android:id="@+id/settings_txt_second"
+            android:id="@+id/settings_rate_us"
             style="@style/DefaultTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -82,7 +82,7 @@
             android:background="?selectableItemBackground"
             android:gravity="center|start"
             android:text="@string/rate_us"
-            android:textColor="@color/gray_color_def"
+            android:textColor="@color/black"
             android:textSize="@dimen/txt_settings_size" />
 
 
@@ -93,7 +93,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/settings_img_marginEnd"
-            android:src="@drawable/ic_path"
+            android:src="@drawable/ic_vector"
             />
 
     </RelativeLayout>
@@ -113,7 +113,7 @@
 
 
         <TextView
-            android:id="@+id/settings_txt_third"
+            android:id="@+id/settings_leave_feedback"
             style="@style/DefaultTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -121,7 +121,7 @@
             android:background="?selectableItemBackground"
             android:gravity="center|start"
             android:text="@string/leave_feedback"
-            android:textColor="@color/gray_color_def"
+            android:textColor="@color/black"
             android:textSize="@dimen/txt_settings_size" />
 
 
@@ -132,7 +132,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/settings_img_marginEnd"
-            android:src="@drawable/ic_path" />
+            android:src="@drawable/ic_vector" />
 
     </RelativeLayout>
 
@@ -152,7 +152,7 @@
 
 
         <TextView
-            android:id="@+id/settings_txt_fourth"
+            android:id="@+id/settings_clear_history"
             style="@style/DefaultTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -160,7 +160,7 @@
             android:background="?selectableItemBackground"
             android:gravity="center|start"
             android:text="@string/clear_history"
-            android:textColor="@color/gray_color_def"
+            android:textColor="@color/black"
             android:textSize="@dimen/txt_settings_size" />
 
 
@@ -171,7 +171,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/settings_img_marginEnd"
-            android:src="@drawable/ic_path" />
+            android:src="@drawable/ic_vector" />
 
     </RelativeLayout>
 

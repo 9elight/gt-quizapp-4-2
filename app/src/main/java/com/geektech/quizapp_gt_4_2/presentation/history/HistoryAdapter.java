@@ -3,6 +3,7 @@ package com.geektech.quizapp_gt_4_2.presentation.history;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
+    private final HistoryListener listener;
     List<History> list = new ArrayList<>();
 
-    public HistoryAdapter() {
-
+    public HistoryAdapter(HistoryListener listener) {
+        this.listener = listener;
     }
     public void updateHistory(List<History> list){
         this.list = list;
@@ -30,7 +32,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_history,parent,false);
-        HistoryViewHolder viewHolder = new HistoryViewHolder(view);
+        HistoryViewHolder viewHolder = new HistoryViewHolder(view,listener);
         return viewHolder;
     }
 
@@ -46,13 +48,25 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_category,tv_correctAnswers,tv_difficulty,tv_date;
+        private ImageView dots;
+        private HistoryListener listener;
 
-        public HistoryViewHolder(@NonNull View itemView) {
+        public HistoryViewHolder(@NonNull View itemView,HistoryListener listener) {
             super(itemView);
+            this.listener = listener;
+
             initView();
+            dots.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDotsClick(getAdapterPosition(),v);
+                }
+            });
+
         }
 
         private void initView(){
+            dots = itemView.findViewById(R.id.dots);
             tv_category = itemView.findViewById(R.id.history_category_value);
             tv_difficulty = itemView.findViewById(R.id.history_difficulty_value);
             tv_correctAnswers = itemView.findViewById(R.id.history_answers_value);
@@ -65,6 +79,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             tv_correctAnswers.setText( history.getCorrectAnswers()+ "/" +history.getAmount());
             tv_date.setText(history.getCreatedAt().toString());
         }
+    }
+
+    public interface HistoryListener{
+        void onDotsClick(int position,View v);
     }
 }
 
