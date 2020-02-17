@@ -160,7 +160,7 @@
             android:background="?selectableItemBackground"
             android:gravity="center|start"
             android:text="@string/clear_history"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/txt_settings_size" />
 
 
@@ -189,7 +189,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/version"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/gray_color_def"
         android:textSize="@dimen/middle_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

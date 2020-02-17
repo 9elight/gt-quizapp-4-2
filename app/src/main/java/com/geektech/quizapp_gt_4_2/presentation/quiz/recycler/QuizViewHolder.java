@@ -59,7 +59,6 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private void initListeners() {
         q_btn1.setOnClickListener(v -> {
             listener.onAnswerClick(getAdapterPosition(),0);
-            q_btn1.setTextColor(Color.WHITE);
         });
         q_btn2.setOnClickListener(v -> {
             listener.onAnswerClick(getAdapterPosition(), 1);

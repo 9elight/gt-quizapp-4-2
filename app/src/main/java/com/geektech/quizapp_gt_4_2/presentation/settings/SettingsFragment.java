@@ -1,10 +1,8 @@
 package com.geektech.quizapp_gt_4_2.presentation.settings;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,29 +30,16 @@ public class SettingsFragment extends CoreFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initListener(view);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"delete",Toast.LENGTH_LONG).show();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Внимание!!");
-                builder.setMessage("Вы точно хотите очистить историю?");
-                builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        App.quizDatabase.historyDao().deleteAll();
-                    }
-                });
-                builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-                App.quizDatabase.historyDao().deleteAll();
-            }
+        clear.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Внимание!!");
+            builder.setMessage("Вы точно хотите очистить историю?");
+            builder.setPositiveButton("Да", (dialog, which) -> App.quizDatabase.historyDao().deleteAll());
+            builder.setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
+            AlertDialog alert = builder.create();
+            alert.show();
+        });
+        share.setOnClickListener(v -> {
         });
     }
 

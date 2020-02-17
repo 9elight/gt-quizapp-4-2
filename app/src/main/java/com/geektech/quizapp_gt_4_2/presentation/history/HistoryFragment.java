@@ -1,9 +1,9 @@
 package com.geektech.quizapp_gt_4_2.presentation.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +73,15 @@ public class HistoryFragment extends CoreFragment implements HistoryAdapter.Hist
                             App.quizDatabase.historyDao().deleteById(currentHistories.get(position).getId());
                             return true;
                 case R.id.share:
-                    Toast.makeText(getActivity(),"share",Toast.LENGTH_LONG).show();
+                    History currentHistory = currentHistories.get(position);
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("plain/text");
+                    intent.putExtra(Intent.EXTRA_TEXT,"game id: " + currentHistory.getId()
+                            + "\ncategory: " + currentHistory.getCategory()
+                            + "\ncorrect answers: " + currentHistory.getCorrectAnswers() + "/" + currentHistory.getAmount()
+                            + "\ndifficulty: " + currentHistory.getDifficulty()
+                            + "\ndate: " + currentHistory.getCreatedAt());
+                    startActivity(Intent.createChooser(intent,""));
                     return true;
             }
             return false;

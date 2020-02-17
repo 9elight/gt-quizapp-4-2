@@ -84,8 +84,6 @@ public class QuizViewModel extends ViewModel {
     void onBackPressed() {
         if (currentQuestionPosition.getValue() != 0){
         currentQuestionPosition.setValue(--count);
-        Log.e("tag", "onBackPressed: " + currentQuestionPosition.getValue()
-                + mQuestion.get(currentQuestionPosition.getValue()).getSelectedAnswerPosition());
         }else{
             finishEvent.call();
         }

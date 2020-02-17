@@ -91,6 +91,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener((v, event) -> true);
 
+
     }
 
     private void getQuestions() {

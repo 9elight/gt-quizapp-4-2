@@ -16,9 +16,7 @@ public class ResultActivity extends AppCompatActivity {
     private static String EXTRA_QUIZ_ID = "result_id";
     private Integer id;
     private ResultViewModel rViewModel;
-    private TextView difficultyValue;
-    private TextView correctAnswerAmount;
-    private TextView resultPercent;
+    private TextView difficultyValue,resultPercent,correctAnswerAmount,resultCategory;
     private Button finishBtn;
 
 
@@ -40,10 +38,12 @@ public class ResultActivity extends AppCompatActivity {
         correctAnswerAmount = findViewById(R.id.correct_answers_amount);
         resultPercent = findViewById(R.id.result_percent_value);
         finishBtn = findViewById(R.id.finish_btn);
+        resultCategory = findViewById(R.id.result_category);
     }
 
     private void setViewContent(){
        rViewModel.quizResult.observe(this, quizResult -> {
+           resultCategory.setText("Category: " + quizResult.getCategory());
            difficultyValue.setText(quizResult.getDifficulty());
            correctAnswerAmount.setText(quizResult.getCorrectAnswerAmount() + "/" + quizResult.getQuestions().size());
            int correctAnswersPercent = (int)((double)quizResult.getCorrectAnswerAmount()/quizResult.getQuestions().size() * 100);
