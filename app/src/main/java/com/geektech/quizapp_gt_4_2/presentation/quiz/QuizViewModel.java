@@ -72,6 +72,7 @@ public class QuizViewModel extends ViewModel {
 
     void onSkipClick() {
         if (mQuestion.size() >= currentQuestionPosition.getValue()) {
+            mQuestion.get(currentQuestionPosition.getValue()).setAnswered(true);
             question.setValue(mQuestion);
             currentQuestionPosition.setValue(++count);
             if (currentQuestionPosition.getValue() + 1 == mQuestion.size()) {

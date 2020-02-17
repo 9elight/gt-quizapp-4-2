@@ -89,7 +89,7 @@
             app:layout_constraintTop_toTopOf="@id/history_category"
             app:layout_constraintBottom_toBottomOf="@id/history_category"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_vector"
+            android:src="@drawable/ic_dots"
             android:padding="8dp"
             />
         <TextView

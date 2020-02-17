@@ -22,7 +22,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public HistoryAdapter(HistoryListener listener) {
         this.listener = listener;
     }
-    public void updateHistory(List<History> list){
+
+    public void updateHistory(List<History> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -31,8 +32,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_history,parent,false);
-        HistoryViewHolder viewHolder = new HistoryViewHolder(view,listener);
+        View view = inflater.inflate(R.layout.item_history, parent, false);
+        HistoryViewHolder viewHolder = new HistoryViewHolder(view, listener);
         return viewHolder;
     }
 
@@ -47,11 +48,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_category,tv_correctAnswers,tv_difficulty,tv_date;
+        private TextView tv_category, tv_correctAnswers, tv_difficulty, tv_date;
         private ImageView dots;
         private HistoryListener listener;
 
-        public HistoryViewHolder(@NonNull View itemView,HistoryListener listener) {
+        public HistoryViewHolder(@NonNull View itemView, HistoryListener listener) {
             super(itemView);
             this.listener = listener;
 
@@ -59,13 +60,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             dots.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onDotsClick(getAdapterPosition(),v);
+                    listener.onDotsClick(getAdapterPosition(), v);
                 }
             });
 
         }
 
-        private void initView(){
+        private void initView() {
             dots = itemView.findViewById(R.id.dots);
             tv_category = itemView.findViewById(R.id.history_category_value);
             tv_difficulty = itemView.findViewById(R.id.history_difficulty_value);
@@ -76,13 +77,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         public void onBind(History history) {
             tv_category.setText(history.getCategory());
             tv_difficulty.setText(history.getDifficulty());
-            tv_correctAnswers.setText( history.getCorrectAnswers()+ "/" +history.getAmount());
-            tv_date.setText(history.getCreatedAt().toString());
+            tv_correctAnswers.setText(history.getCorrectAnswers() + "/" + history.getAmount());
+            tv_date.setText(history.getCreatedAt().toLocaleString());
         }
     }
 
-    public interface HistoryListener{
-        void onDotsClick(int position,View v);
+
+    public interface HistoryListener {
+        void onDotsClick(int position, View v);
     }
 }
 

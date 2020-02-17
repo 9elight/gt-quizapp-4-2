@@ -68,11 +68,10 @@ public class HistoryFragment extends CoreFragment implements HistoryAdapter.Hist
         popupMenu.inflate(R.menu.popup_menu);
 
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()){
-                case R.id.delete:
-                    App.quizDatabase.historyDao().deleteById(currentHistories.get(position).getId());
-                    Toast.makeText(getActivity(),"delete",Toast.LENGTH_LONG).show();
-                    return true;
+                    switch (item.getItemId()) {
+                        case R.id.delete:
+                            App.quizDatabase.historyDao().deleteById(currentHistories.get(position).getId());
+                            return true;
                 case R.id.share:
                     Toast.makeText(getActivity(),"share",Toast.LENGTH_LONG).show();
                     return true;

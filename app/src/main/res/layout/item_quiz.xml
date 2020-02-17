@@ -9,13 +9,14 @@
 
     <TextView
         android:id="@+id/question_text_view"
-        android:layout_width="@dimen/question_width"
-        android:layout_height="@dimen/question_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/def_question_text"
         android:textSize="20sp"
+        android:paddingHorizontal="24dp"
         android:textAlignment="center"
         android:fontFamily="@font/sfprodisplaylight"
         android:layout_marginTop="@dimen/top_margin_middle"/>

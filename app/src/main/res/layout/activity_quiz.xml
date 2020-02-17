@@ -19,30 +19,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/categoryTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/tv_category_marginTop"
         android:fontFamily="@font/sfpro_bold"
-        android:visibility="invisible"
+        android:gravity="center"
+        android:paddingHorizontal="24dp"
         android:text="category"
         android:textSize="@dimen/middle_text_size"
-        android:layout_marginTop="@dimen/tv_category_marginTop"/>
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/back_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/categoryTitle"
+        android:layout_marginStart="24dp"
+        android:onClick="backClick"
+        android:padding="10dp"
+        android:src="@drawable/ic_path"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/categoryTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"
-        android:visibility="invisible"
-        android:onClick="backClick"
-        android:src="@drawable/ic_path"
-        android:layout_marginStart="24dp"/>
+        app:layout_constraintTop_toTopOf="@id/categoryTitle" />
     <ProgressBar
         android:id="@+id/quiz_progressBar"
         android:layout_width="175dp"
