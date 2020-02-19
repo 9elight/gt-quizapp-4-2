@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.EType;
 import com.geektech.quizapp_gt_4_2.model.Question;
@@ -20,6 +21,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private Listener listener;
     private Question question;
     private int position;
+    private String translatedText;
 
     private Button q_btn1;
     private Button q_btn2;
@@ -93,20 +95,41 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         }
         this.position = position;
         this.question = question;
-        question_text.setText(Html.fromHtml(question.getQuestion()));
+        App.myTranslator.translate((Html.fromHtml(question.getQuestion())).toString())
+                .addOnSuccessListener(s1 -> {
+                    question_text.setText(s1);
+                });
+
         if (question.getType() == EType.MULTIPLE) {
             boolean_container.setVisibility(View.INVISIBLE);
             multiply_container.setVisibility(View.VISIBLE);
-            q_btn1.setText(Html.fromHtml(question.getAnswers().get(0)));
-            q_btn2.setText(Html.fromHtml(question.getAnswers().get(1)));
-            q_btn3.setText(Html.fromHtml(question.getAnswers().get(2)));
-            q_btn4.setText(Html.fromHtml(question.getAnswers().get(3)));
-            Log.e("tag", "initListeners: ");
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(0)).toString())
+                    .addOnSuccessListener(s -> {
+                        q_btn1.setText(s);
+                    });
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(1)).toString())
+                    .addOnSuccessListener(s -> {
+                        q_btn2.setText(s);
+                    });
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(2)).toString())
+                    .addOnSuccessListener(s -> {
+                        q_btn3.setText(s);
+                    });
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(3)).toString())
+                    .addOnSuccessListener(s -> {
+                        q_btn4.setText(s);
+                    });
         } else {
             multiply_container.setVisibility(View.INVISIBLE);
             boolean_container.setVisibility(View.VISIBLE);
-            boolean_btn1.setText(question.getAnswers().get(0));
-            boolean_btn2.setText(question.getAnswers().get(1));
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(0)).toString())
+                    .addOnSuccessListener(s -> {
+                        boolean_btn1.setText(s);
+                    });
+            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(1)).toString())
+                    .addOnSuccessListener(s -> {
+                        boolean_btn2.setText(s);
+                    });
         }
         if (question.isAnswered())
             btn_state(question);

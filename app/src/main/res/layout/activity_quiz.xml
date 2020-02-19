@@ -85,11 +85,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quiz_recyclerView"
-        android:background="@drawable/bg_skip_btn"
+        android:background="@android:color/transparent"
         android:visibility="invisible"
         android:text="Skip"
         android:onClick="skipClick"
         android:textColor="@color/white"
         />
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:progressDrawable="@drawable/progress_bar_states"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:indeterminate="false"
+        android:visibility="invisible"
+        android:max="20"
+        android:progress="20"
+        app:layout_constraintTop_toTopOf="@id/skip_btn"
+        app:layout_constraintBottom_toBottomOf="@id/skip_btn"
+        app:layout_constraintStart_toStartOf="@id/skip_btn"
+        app:layout_constraintEnd_toEndOf="@id/skip_btn"
+        style="?android:attr/progressBarStyleHorizontal"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
