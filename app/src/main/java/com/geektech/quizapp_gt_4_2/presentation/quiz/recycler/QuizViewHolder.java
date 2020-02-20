@@ -21,8 +21,6 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private Listener listener;
     private Question question;
     private int position;
-    private String translatedText;
-
     private Button q_btn1;
     private Button q_btn2;
     private Button q_btn3;

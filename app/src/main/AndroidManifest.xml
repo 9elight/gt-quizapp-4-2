@@ -20,7 +20,8 @@
             android:name=".presentation.quiz.QuizActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".presentation.splash.SplashScreen">
+            android:name=".presentation.splash.SplashScreen"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
